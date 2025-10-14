@@ -1,0 +1,692 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --background: transparent;
+  --foreground: oklch(0.985 0 0);
+  --card: #ffffff;
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #030213;
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.0058 264.53);
+  --secondary-foreground: #030213;
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+  --accent: #e9ebef;
+  --accent-foreground: #030213;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: transparent;
+  --input-background: #f3f3f5;
+  --switch-background: #cbced4;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #030213;
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/* Responsive font size scaling for smaller desktop screens */
+@media (max-width: 1400px) {
+  :root {
+    --font-size: 15px;
+  }
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --font-size: 14px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size: 13px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --font-size: 12px;
+  }
+}
+
+.dark {
+  --background: transparent;
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --text-2xl: 1.5rem;
+  --text-xl: 1.25rem;
+  --text-lg: 1.125rem;
+  --text-base: 1rem;
+}
+
+/* Responsive text size scaling */
+@media (max-width: 1400px) {
+  @theme {
+    --text-2xl: 1.4rem;
+    --text-xl: 1.2rem;
+    --text-lg: 1.1rem;
+    --text-base: 1rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  @theme {
+    --text-2xl: 1.3rem;
+    --text-xl: 1.15rem;
+    --text-lg: 1.05rem;
+    --text-base: 0.95rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  @theme {
+    --text-2xl: 1.25rem;
+    --text-xl: 1.125rem;
+    --text-lg: 1rem;
+    --text-base: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  @theme {
+    --text-2xl: 1.2rem;
+    --text-xl: 1.1rem;
+    --text-lg: 0.95rem;
+    --text-base: 0.875rem;
+  }
+}
+
+@media (max-width: 640px) {
+  @theme {
+    --text-2xl: 1.125rem;
+    --text-xl: 1rem;
+    --text-lg: 0.9rem;
+    --text-base: 0.85rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Exo 2', sans-serif;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    h4 {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+
+    label {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* Custom cosmic background utilities */
+@layer utilities {
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+  
+  .bg-gradient-cosmic {
+    background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+  }
+  
+  /* App Container - Vertical Layout */
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Header - Fixed height at top */
+  .app-header {
+    flex-shrink: 0;
+    height: 90px;
+    width: 100%;
+    z-index: 50;
+    background: transparent;
+    pointer-events: none;
+    position: relative;
+  }
+  
+  .app-header > * {
+    pointer-events: auto;
+  }
+  
+  /* Body - Flexible, takes remaining space */
+  .app-body {
+    flex: 1;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: auto;
+    /* Hide scrollbar for webkit browsers */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+    z-index: 10;
+    background: transparent;
+  }
+  
+  .app-body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Footer - Fixed height at bottom */
+  .app-footer {
+    flex-shrink: 0;
+    height: 80px;
+    width: 100%;
+    z-index: 50;
+    background: transparent;
+    pointer-events: none;
+    position: relative;
+  }
+  
+  /* Mobile footer - smaller height */
+  @media (max-width: 1024px) {
+    .app-footer {
+      height: 40px;
+    }
+  }
+  
+  .app-footer > * {
+    pointer-events: auto;
+  }
+  
+  /* Section - Each takes full body height */
+  .app-section {
+    scroll-snap-align: start;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+    background: transparent;
+    isolation: isolate;
+  }
+
+  /* Body layout - main content area between header and footer */
+  .body-layout {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    /* Hide scrollbar for webkit browsers */
+    -webkit-scrollbar: none;
+    -webkit-scrollbar-track: transparent;
+    -webkit-scrollbar-thumb: transparent;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Section wrapper - base container for all sections */
+  .section-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    opacity: 1;
+  }
+  
+  /* Show sections when active with reveal animations */
+  .section-wrapper[data-active="false"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .section-wrapper[data-active="false"] .hud-stagger-1,
+  .section-wrapper[data-active="false"] .hud-stagger-2,
+  .section-wrapper[data-active="false"] .hud-stagger-3,
+  .section-wrapper[data-active="false"] .hud-stagger-4,
+  .section-wrapper[data-active="false"] .hud-stagger-5,
+  .section-wrapper[data-active="false"] .hud-stagger-6,
+  .section-wrapper[data-active="false"] .hud-stagger-7,
+  .section-wrapper[data-active="false"] .hud-stagger-8 {
+    opacity: 0 !important;
+    animation: none !important;
+  }
+  
+  .section-wrapper[data-active="true"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Three-column layout - sizing handled by JavaScript responsive context */
+  /* Only essential non-responsive rules here */
+
+
+  /* HUD width constraints - sizing is handled by JavaScript responsive context */
+  .space-hud-container,
+  [class*="SpaceHUD"] {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .space-hud-container *,
+  [class*="SpaceHUD"] * {
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Force all text content to wrap */
+  .space-hud-container div,
+  .space-hud-container span,
+  .space-hud-container p,
+  [class*="SpaceHUD"] div,
+  [class*="SpaceHUD"] span,
+  [class*="SpaceHUD"] p {
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  /* Better responsive text wrapping */
+  @media (max-width: 1200px) {
+    h1, h2, h3, h4, h5, h6 {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+  }
+
+  /* Custom scrollbar styles for SpaceHUD content */
+  .space-hud-content::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .space-hud-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .space-hud-content::-webkit-scrollbar-thumb {
+    background: rgba(250, 204, 20, 0.3);
+    border-radius: 2px;
+  }
+
+  .space-hud-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(250, 204, 20, 0.5);
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .section-title-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1.875rem;
+    color: rgb(34 211 238);
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  .section-title-icon {
+    font-size: 1.875rem;
+  }
+  
+  .section-title-description {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.5rem;
+  }
+}
+
+/* Smooth scrolling for webkit browsers */
+@supports (-webkit-scroll-snap-type: y mandatory) {
+  .snap-container {
+    -webkit-scroll-snap-type: y mandatory;
+  }
+  
+  .snap-section {
+    -webkit-scroll-snap-align: start;
+  }
+}
+
+/* SciFi HUD animations */
+@keyframes sci-fi-scan {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: translateY(calc(100% - 2px)); opacity: 0; }
+}
+
+.sci-fi-scan-line {
+  animation: sci-fi-scan 3s linear infinite;
+}
+
+/* Optimized HUD Animations - Reduced for performance */
+@keyframes advanced-scan-horizontal {
+  0% { transform: translateX(-100%); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes advanced-corner-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes advanced-scan-vertical {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+.advanced-scan-line-horizontal {
+  animation: advanced-scan-horizontal 4s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* SciFi HUD Title enhancements */
+.sci-fi-title {
+  text-shadow: 0 0 8px currentColor;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+/* Enhanced glow effect for HUD borders */
+.sci-fi-glow {
+  filter: drop-shadow(0 0 4px currentColor) drop-shadow(0 0 8px currentColor);
+}
+
+/* New SpaceHUD Animations */
+@keyframes space-scan-line {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(calc(100vh + 50px)); opacity: 0; }
+}
+
+@keyframes space-title-shine {
+  0% { transform: translateX(-100%); opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+.space-scan-line {
+  animation: space-scan-line 4s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.space-title-shine {
+  animation: space-title-shine 3s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* Essential animations only - removed unused planetary system animations for performance */
+
+
+
+/* HUD staggered reveal animation - Smooth and elegant */
+@keyframes hud-reveal {
+  0% { 
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Performance optimizations */
+.hud-stagger-1, .hud-stagger-2, .hud-stagger-3, 
+.hud-stagger-4, .hud-stagger-5, .hud-stagger-6,
+.hud-stagger-7, .hud-stagger-8 {
+  will-change: opacity, transform;
+}
+
+.section-wrapper[data-active="true"] .hud-stagger-1,
+.section-wrapper[data-active="true"] .hud-stagger-2,
+.section-wrapper[data-active="true"] .hud-stagger-3,
+.section-wrapper[data-active="true"] .hud-stagger-4,
+.section-wrapper[data-active="true"] .hud-stagger-5,
+.section-wrapper[data-active="true"] .hud-stagger-6,
+.section-wrapper[data-active="true"] .hud-stagger-7,
+.section-wrapper[data-active="true"] .hud-stagger-8 {
+  will-change: auto;
+}
+
+/* Simplified text animations for better performance */
+@keyframes text-slide-down {
+  0% { 
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section title decrypt animation - appears FIRST before all content */
+.section-title-decrypt {
+  opacity: 1;
+  animation-delay: 0s;
+}
+
+/* Optimized stagger classes - faster and lighter */
+.hud-stagger-1 {
+  animation: hud-reveal 0.4s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.05s;
+}
+
+.hud-stagger-2 {
+  animation: hud-reveal 0.4s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.15s;
+}
+
+.hud-stagger-3 {
+  animation: hud-reveal 0.4s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.25s;
+}
+
+.hud-stagger-4 {
+  animation: hud-reveal 0.4s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.35s;
+}
+
+.hud-stagger-5 {
+  animation: hud-reveal 0.4s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.45s;
+}
+
+.hud-stagger-6 {
+  animation: hud-reveal 0.4s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.55s;
+}
+
+.hud-stagger-7 {
+  animation: hud-reveal 0.4s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.65s;
+}
+
+.hud-stagger-8 {
+  animation: hud-reveal 0.4s ease-out forwards;
+  opacity: 0;
+  animation-delay: 0.75s;
+}
+
+
