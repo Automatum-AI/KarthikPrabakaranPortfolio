@@ -2,7 +2,7 @@ import React from 'react';
 import { ResponsiveProvider, useResponsive } from './components/ui/responsive-context';
 import { DesktopApp } from './components/layout/DesktopApp';
 import { MobileApp } from './components/layout/MobileApp';
-import BlackHoleBackground from './components/BlackHoleBackground';
+import DramaticBlackHole from './components/DramaticBlackHole';
 
 function AppContent() {
   const { isMobile, isReady } = useResponsive();
@@ -127,7 +127,7 @@ class BlackHoleRoot extends React.Component<{}, { scrollProgress: number; curren
 
   render() {
     return (
-      <BlackHoleBackground 
+      <DramaticBlackHole 
         scrollProgress={this.state.scrollProgress} 
         currentSection={this.state.currentSection}
       />

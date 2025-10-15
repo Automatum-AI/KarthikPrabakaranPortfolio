@@ -1,6 +1,7 @@
 import React from 'react';
 import { SectionLayout } from '../SectionLayout';
 import { useResponsive } from '../ui/responsive-context';
+import { sectionLabels } from '../../content';
 
 interface HomeSectionProps {
   isActive: boolean;
@@ -37,7 +38,7 @@ export function HomeSection({ isActive }: HomeSectionProps) {
               lineHeight: 'normal'
             }}
           >
-            <p className="whitespace-nowrap">BEYOND EARTH. BEYOND DESIGN.</p>
+            <p className="whitespace-nowrap">{sectionLabels.home.heroText}</p>
           </div>
         </div>
       </div>

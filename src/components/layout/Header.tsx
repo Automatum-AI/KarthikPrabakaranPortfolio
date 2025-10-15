@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScrambledText } from '../ScrambledText';
 import { useResponsive } from '../ui/responsive-context';
-import { navigationSections } from '../../content/website-content';
+import { navigationSections, sectionTitleMapping } from '../../content';
 
 interface HeaderProps {
   activeSection: string;
@@ -181,7 +181,7 @@ export function Header({ activeSection, onSectionChange }: HeaderProps) {
               }}
             >
               <ScrambledText 
-                text={displaySection}
+                text={sectionTitleMapping[displaySection] || displaySection}
                 isActive={shouldAnimate}
                 scrambleDuration={800}
                 revealDelay={0}

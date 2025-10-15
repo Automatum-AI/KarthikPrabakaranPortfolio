@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SpaceHUD } from '../SpaceHUD';
 import { SectionLayout, ThreeColumnLayout } from '../SectionLayout';
-import { experience } from '../../content/website-content';
+import { experience, sectionLabels } from '../../content';
 import { useResponsive } from '../ui/responsive-context';
 
 interface ExperienceSectionProps {
@@ -49,12 +49,12 @@ export function ExperienceSection({ isActive }: ExperienceSectionProps) {
                 <div className="w-3 h-3 rounded-full animate-pulse"
                      style={{ backgroundColor: getTypeColor(selectedExp.type) }}></div>
                 <span className="text-white font-mono tracking-wider uppercase" style={{ fontSize: `${responsive.fontSize.lg}px` }}>
-                  CAREER DETAILS
+                  {sectionLabels.experience.careerDetailsTitle}
                 </span>
               </div>
               
               <div className="font-medium text-white/60" style={{ fontSize: `${responsive.fontSize.base}px` }}>
-                <p>COMPANY</p>
+                <p>{sectionLabels.experience.companyLabel}</p>
               </div>
               <div 
                 className="font-bold"
@@ -107,7 +107,7 @@ export function ExperienceSection({ isActive }: ExperienceSectionProps) {
             
             <div className="flex flex-col" style={{ gap: `${responsive.spacing.sm}px` }}>
               <div className="font-medium text-white/60" style={{ fontSize: `${responsive.fontSize.base}px` }}>
-                <p>DURATION</p>
+                <p>{sectionLabels.experience.durationLabel}</p>
               </div>
               <div 
                 className="font-bold"
@@ -123,7 +123,7 @@ export function ExperienceSection({ isActive }: ExperienceSectionProps) {
             
             <div className="flex flex-col" style={{ gap: `${responsive.spacing.sm}px` }}>
               <div className="font-medium text-white/60" style={{ fontSize: `${responsive.fontSize.base}px` }}>
-                <p>LOCATION</p>
+                <p>{sectionLabels.experience.locationLabel}</p>
               </div>
               <div 
                 className="font-bold"

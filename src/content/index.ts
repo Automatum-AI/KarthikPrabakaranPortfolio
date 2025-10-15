@@ -5,36 +5,29 @@
 
 export {
   // Types
-  type PortfolioSection,
   type ProfileData,
-  type QuickStat,
   type ContactMethod,
-  type MissionLogEntry,
+  type ContactInfo,
   type Skill,
   type SkillCategory,
   type Project,
   type Experience,
-  type AboutData,
+  type SectionLabels,
   
   // Data
-  portfolioSections,
   profileData,
-  homeIntroText,
-  quickStats,
   contactMethods,
   contactInfo,
   socialLinks,
   collaborationTypes,
   additionalChannels,
-  getMissionLogEntries,
-  statusColors,
-  navigationLabels,
   navigationSections,
+  sectionTitleMapping,
   coordinateData,
-  aboutData,
   skills,
   projects,
   experience,
+  sectionLabels,
   
   // Skills Management - New Category System
   skillCategories,

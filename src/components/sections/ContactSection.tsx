@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SpaceHUD } from '../SpaceHUD';
 import { SectionLayout, ThreeColumnLayout } from '../SectionLayout';
-import { contactMethods, contactInfo, socialLinks, collaborationTypes, additionalChannels } from '../../content/website-content';
+import { contactMethods, contactInfo, socialLinks, collaborationTypes, additionalChannels, sectionLabels } from '../../content';
 import { useResponsive } from '../ui/responsive-context';
 
 interface ContactSectionProps {
@@ -88,7 +88,7 @@ export function ContactSection({ isActive }: ContactSectionProps) {
         }
         middle={
           <div className="hud-stagger-4 h-full flex flex-col">
-            <SpaceHUD variant="accent" title="MISSION BRIEFING" size="large" glow={true}>
+            <SpaceHUD variant="accent" title={sectionLabels.contact.missionBriefingTitle} size="large" glow={true}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: `${responsive.spacing.lg}px` }}>
                 {/* Header */}
                 <div className="text-center pb-4 border-b border-[#20DBE9]/20">
@@ -214,7 +214,7 @@ export function ContactSection({ isActive }: ContactSectionProps) {
         }
         right={
           <div className="hud-stagger-5">
-            <SpaceHUD variant="accent" title="SOCIAL LINKS" size="medium" glow={true}>
+            <SpaceHUD variant="accent" title={sectionLabels.contact.socialLinksTitle} size="medium" glow={true}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: `${responsive.spacing.md}px` }}>
                 {socialLinks.map((link, index) => (
                   <a

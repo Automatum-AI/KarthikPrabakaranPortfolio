@@ -1,15 +1,6 @@
 // Website Content Configuration
 // This file contains all the static content for the space-themed portfolio
 
-export interface PortfolioSection {
-  id: string;
-  name: string;
-  icon: string;
-  title: string;
-  description: string;
-  summary: string;
-}
-
 export interface ProfileData {
   name: string;
   designation: string;
@@ -17,12 +8,6 @@ export interface ProfileData {
   bio: string;
   location: string;
   experience: string;
-}
-
-export interface QuickStat {
-  value: string;
-  label: string;
-  color: string;
 }
 
 export interface ContactMethod {
@@ -37,12 +22,6 @@ export interface ContactInfo {
   mobile: string;
   email: string;
   location: string;
-}
-
-export interface MissionLogEntry {
-  status: "success" | "active" | "warning" | "error";
-  message: string;
-  detail: string;
 }
 
 export interface Skill {
@@ -89,66 +68,46 @@ export interface Experience {
   type: "full-time" | "freelance" | "contract";
 }
 
-export interface AboutData {
-  introduction: string;
-  philosophy: string;
-  approach: string;
-  values: string[];
-  achievements: string[];
-  interests: string[];
+export interface SectionLabels {
+  skills: {
+    terminalTitle: string;
+    categoryTitle: string;
+    matrixStatsTitle: string;
+    totalSkillsLabel: string;
+    expertLevelLabel: string;
+    primarySkillsTitle: string;
+    supportingSkillsTitle: string;
+  };
+  home: {
+    heroText: string;
+  };
+  experience: {
+    terminalTitle: string;
+    serviceSummaryTitle: string;
+    missionHistoryTitle: string;
+    careerDetailsTitle: string;
+    companyLabel: string;
+    durationLabel: string;
+    locationLabel: string;
+  };
+  about: {
+    profileStatusTitle: string;
+    personalDataTitle: string;
+    achievementsTitle: string;
+  };
+  projects: {
+    archiveTitle: string;
+    missionStatusTitle: string;
+    projectDetailsTitle: string;
+  };
+  contact: {
+    commChannelTitle: string;
+    collaborationTitle: string;
+    contactFormTitle: string;
+    missionBriefingTitle: string;
+    socialLinksTitle: string;
+  };
 }
-
-// Portfolio sections with space theme
-export const portfolioSections: PortfolioSection[] = [
-  {
-    id: "home",
-    name: "Home",
-    icon: "🏠",
-    title: "Mission Control",
-    description: "Command Center",
-    summary: "Central operations hub for navigating through the portfolio universe. Your mission briefing starts here with access to all sectors of expertise and professional achievements.",
-  },
-  {
-    id: "about",
-    name: "About",
-    icon: "👨‍🚀",
-    title: "Commander Profile",
-    description: "Personal History",
-    summary: "Background intel on the mission commander. Discover the journey from creative exploration to AI integration, including personal philosophy and professional evolution.",
-  },
-  {
-    id: "skills",
-    name: "Skills",
-    icon: "⚡",
-    title: "Tech Arsenal",
-    description: "Capabilities",
-    summary: "Advanced capabilities and technical equipment. Comprehensive overview of design tools, AI technologies, and specialized skills acquired through years of cosmic exploration.",
-  },
-  {
-    id: "projects",
-    name: "Projects",
-    icon: "🚀",
-    title: "Mission Archives",
-    description: "Completed Missions",
-    summary: "Documented evidence of successful operations. Featured portfolio pieces showcasing creative solutions, AI implementations, and collaborative achievements across various sectors.",
-  },
-  {
-    id: "experience",
-    name: "Experience",
-    icon: "🌟",
-    title: "Career Trajectory",
-    description: "Service Record",
-    summary: "Historical data of professional engagements. Timeline of positions held, responsibilities undertaken, and significant contributions to organizations and projects.",
-  },
-  {
-    id: "contact",
-    name: "Contact",
-    icon: "📡",
-    title: "Communication Hub",
-    description: "Establish Contact",
-    summary: "Establish direct communication channels. Multiple methods available for mission briefings, collaboration proposals, and professional consultations.",
-  },
-];
 
 // Profile information
 export const profileData: ProfileData = {
@@ -160,36 +119,49 @@ export const profileData: ProfileData = {
   experience: "10+ Years"
 };
 
-// Home section intro text
-export const homeIntroText = {
-  primary: "WELCOME TO THE PORTFOLIO UNIVERSE",
-  secondary: "Navigate through space to discover creative solutions, AI implementations, and professional achievements. Each sector represents a different aspect of expertise and experience.",
-  cta: "Begin exploration by selecting a mission from the navigation panel"
+// Section-specific labels and titles
+export const sectionLabels: SectionLabels = {
+  skills: {
+    terminalTitle: "SKILL MATRIX TERMINAL",
+    categoryTitle: "Select Category",
+    matrixStatsTitle: "MATRIX STATS",
+    totalSkillsLabel: "Total Skills",
+    expertLevelLabel: "Expert Level",
+    primarySkillsTitle: "Core Expertise",
+    supportingSkillsTitle: "Supporting Skills"
+  },
+  home: {
+    heroText: "BEYOND EARTH. BEYOND DESIGN."
+  },
+  experience: {
+    terminalTitle: "CAREER TRAJECTORY",
+    serviceSummaryTitle: "SERVICE SUMMARY",
+    missionHistoryTitle: "MISSION HISTORY",
+    careerDetailsTitle: "CAREER DETAILS",
+    companyLabel: "COMPANY",
+    durationLabel: "DURATION", 
+    locationLabel: "LOCATION"
+  },
+  about: {
+    profileStatusTitle: "COMMANDER PROFILE",
+    personalDataTitle: "PERSONAL DATA",
+    achievementsTitle: "MISSION ACHIEVEMENTS"
+  },
+  projects: {
+    archiveTitle: "MISSION ARCHIVE",
+    missionStatusTitle: "MISSION STATUS",
+    projectDetailsTitle: "PROJECT DETAILS"
+  },
+  contact: {
+    commChannelTitle: "COMMUNICATION CHANNELS",
+    collaborationTitle: "COLLABORATION TYPES",
+    contactFormTitle: "ESTABLISH CONTACT",
+    missionBriefingTitle: "MISSION BRIEFING",
+    socialLinksTitle: "SOCIAL LINKS"
+  }
 };
 
-// Quick statistics
-export const quickStats: QuickStat[] = [
-  {
-    value: "200+",
-    label: "Projects",
-    color: "text-cyan-400",
-  },
-  {
-    value: "10+",
-    label: "Years",
-    color: "text-green-400",
-  },
-  {
-    value: "50+",
-    label: "Campaigns",
-    color: "text-purple-400",
-  },
-  {
-    value: "100%",
-    label: "Satisfaction",
-    color: "text-orange-400",
-  },
-];
+
 
 // Contact methods
 export const contactMethods: ContactMethod[] = [
@@ -260,51 +232,18 @@ export const additionalChannels = [
   { icon: '💬', label: 'Discord', value: 'karthik#1234', color: '#A855F7' }
 ];
 
-// Mission log entries
-export const getMissionLogEntries = (
-  currentSection: string,
-): MissionLogEntry[] => {
-  const currentSectionData = portfolioSections.find(
-    (s) => s.id === currentSection,
-  );
-
-  return [
-    {
-      status: "success",
-      message: "Systems initialized",
-      detail: "Portfolio loaded successfully",
-    },
-    {
-      status: "active",
-      message: "Navigation active",
-      detail: "Ready for exploration",
-    },
-    {
-      status: "warning",
-      message: `Currently viewing: ${currentSectionData?.name || "Unknown"}`,
-      detail: currentSectionData?.title || "Unknown section",
-    },
-  ];
-};
-
-// Status colors for mission log
-export const statusColors = {
-  success: "text-green-400",
-  active: "text-cyan-400",
-  warning: "text-yellow-400",
-  error: "text-red-400",
-};
-
-// Navigation labels
-export const navigationLabels = {
-  title: "MISSION CONTROL",
-  subtitle: "SPACE PORTFOLIO INTERFACE",
-  currentSection: "Current Mission",
-  coordinates: "Coordinates",
-};
-
 // Navigation sections
 export const navigationSections = ['Home', 'About', 'Skills', 'Projects', 'Experience', 'Contact'];
+
+// Section title mapping for the left side display
+export const sectionTitleMapping: Record<string, string> = {
+  'Home': 'MISSION CONTROL',
+  'About': 'COMMANDER PROFILE', 
+  'Skills': 'TECH ARSENAL',
+  'Projects': 'MISSION ARCHIVES',
+  'Experience': 'SERVICE RECORD',
+  'Contact': 'COMMUNICATIONS'
+};
 
 // Coordinate system data for headers/footers
 export const coordinateData = [
@@ -313,31 +252,7 @@ export const coordinateData = [
   { label: 'Z', color: '#e5cb41' }
 ];
 
-// About section data
-export const aboutData: AboutData = {
-  introduction: "As an innovative and dedicated designer with 10+ years of experience, I've embraced new design trends and technologies, allowing me to stay ahead in a rapidly evolving field. I excel in collaborating with clients, team members, and stakeholders to understand project goals and deliver designs that exceed expectations.",
-  philosophy: "Throughout my career, I've encountered and resolved numerous design challenges, which has honed my ability to find innovative solutions. Whether it's transforming vague concepts into captivating designs or troubleshooting technical issues, I bring a problem-solving mindset to every project.",
-  approach: "Having worked in various roles, I have developed leadership skills that enable me to guide and mentor junior designers. I am dedicated to continuous professional development and eagerly seek out opportunities to expand my skill set, including learning Gen AI and Prompt engineering to develop websites, apps, and automation.",
-  values: [
-    "A/B testing creatives to make design guidelines based on target audience",
-    "Finding solutions for design problems to create an easy design process",
-    "Maintaining brand and design consistency across all touchpoints",
-    "Mentoring juniors and fostering team growth"
-  ],
-  achievements: [
-    "10+ years of experience in graphic design and visual communication",
-    "Managed and mentored teams of designers across multiple organizations",
-    "Created campaign ideas and design solutions for major fintech brands",
-    "Learned Gen AI and Prompt engineering for web/app development and automation"
-  ],
-  interests: [
-    "Gen AI & Prompt Engineering",
-    "Digital Marketing & Branding",
-    "UI/UX Design",
-    "Workflow Automation",
-    "Creative Problem Solving"
-  ]
-};
+
 
 // ================================
 // CENTRALIZED SKILL CATEGORIES SYSTEM
@@ -354,21 +269,21 @@ export const skillCategories: SkillCategory[] = [
   // 🎨 DESIGN CATEGORY
   {
     id: 'design',
-    name: 'Design & Visual Arts',
+    name: 'Design',
     description: 'Creative visual solutions with a focus on user experience, brand identity, and modern design principles. Expert-level proficiency in industry-standard tools and methodologies.',
     color: '#20DBE9',
     icon: '🎨',
     primarySkills: [
-      { name: "Photoshop", category: "Design", level: 98, isPrimary: true, description: "Expert-level photo editing and digital design", color: "#20DBE9" },
-      { name: "Illustrator", category: "Design", level: 96, isPrimary: true, description: "Advanced vector graphics and logo design", color: "#20DBE9" },
-      { name: "Graphic Design", category: "Design", level: 98, isPrimary: true, description: "Comprehensive visual design expertise", color: "#20DBE9" },
-      { name: "Branding", category: "Design", level: 94, isPrimary: true, description: "Brand identity and strategy development", color: "#20DBE9" },
+      { name: "Branding", category: "Design", level: 98, isPrimary: true, description: "Expert-level photo editing and digital design", color: "#20DBE9" },
+      { name: "Graphic Design", category: "Design", level: 96, isPrimary: true, description: "Advanced vector graphics and logo design", color: "#20DBE9" },
+      { name: "Presentations", category: "Design", level: 98, isPrimary: true, description: "Comprehensive visual design expertise", color: "#20DBE9" },
+      { name: "Creative Strategies", category: "Design", level: 94, isPrimary: true, description: "Brand identity and strategy development", color: "#20DBE9" },
     ],
     secondarySkills: [
-      { name: "InDesign", category: "Design", level: 90, isPrimary: false, description: "Professional layout and publication design", color: "#20DBE9" },
-      { name: "After Effects", category: "Design", level: 88, isPrimary: false, description: "Motion graphics and animation", color: "#20DBE9" },
-      { name: "Dimension", category: "Design", level: 85, isPrimary: false, description: "3D design and product visualization", color: "#20DBE9" },
-      { name: "UI/UX Design", category: "Design", level: 90, isPrimary: false, description: "User interface and experience design", color: "#20DBE9" },
+      { name: "Photoshop", category: "Design", level: 90, isPrimary: false, description: "Professional layout and publication design", color: "#20DBE9" },
+      { name: "Illustrator", category: "Design", level: 88, isPrimary: false, description: "Motion graphics and animation", color: "#20DBE9" },
+      { name: "Indesign", category: "Design", level: 85, isPrimary: false, description: "3D design and product visualization", color: "#20DBE9" },
+      { name: "Figma", category: "Design", level: 90, isPrimary: false, description: "User interface and experience design", color: "#20DBE9" },
     ]
   },
 
@@ -385,41 +300,23 @@ export const skillCategories: SkillCategory[] = [
       { name: "AI Automation", category: "AI", level: 88, isPrimary: true, description: "Workflow automation and process optimization", color: "#FACC14" },
     ],
     secondarySkills: [
-      { name: "Machine Learning", category: "AI", level: 75, isPrimary: false, description: "Basic ML concepts and applications", color: "#FACC14" },
-      { name: "AI Tools Integration", category: "AI", level: 85, isPrimary: false, description: "Integrating AI tools into creative workflows", color: "#FACC14" },
+      { name: "App Development", category: "AI", level: 75, isPrimary: false, description: "Basic ML concepts and applications", color: "#FACC14" },
+      { name: "Image Generation", category: "AI", level: 85, isPrimary: false, description: "Integrating AI tools into creative workflows", color: "#FACC14" },
       { name: "Data Analysis", category: "AI", level: 80, isPrimary: false, description: "Data-driven insights and optimization", color: "#FACC14" },
     ]
   },
 
-  // 💼 LEADERSHIP CATEGORY
-  {
-    id: 'leadership',
-    name: 'Leadership & Management',
-    description: 'Managing teams, mentoring talent, and driving successful project delivery through effective leadership. Proven track record in team management and client relations.',
-    color: '#EF4444',
-    icon: '👥',
-    primarySkills: [
-      { name: "Team Leadership", category: "Leadership", level: 95, isPrimary: true, description: "Managing and mentoring design teams", color: "#EF4444" },
-      { name: "Client Management", category: "Leadership", level: 96, isPrimary: true, description: "Stakeholder relations and project delivery", color: "#EF4444" },
-      { name: "Project Management", category: "Leadership", level: 92, isPrimary: true, description: "End-to-end project coordination and delivery", color: "#EF4444" },
-    ],
-    secondarySkills: [
-      { name: "Mentoring", category: "Leadership", level: 88, isPrimary: false, description: "Training and developing junior team members", color: "#EF4444" },
-      { name: "Process Optimization", category: "Leadership", level: 85, isPrimary: false, description: "Improving team workflows and efficiency", color: "#EF4444" },
-      { name: "Strategic Planning", category: "Leadership", level: 87, isPrimary: false, description: "Long-term planning and goal setting", color: "#EF4444" },
-    ]
-  },
 
   // 💻 DEVELOPMENT CATEGORY
   {
-    id: 'development',
-    name: 'Web Development',
+    id: 'uiux',
+    name: 'Ui/UX Design',
     description: 'Modern web development using cutting-edge frameworks and best practices for scalable applications. Growing expertise in full-stack development and modern web technologies.',
     color: '#5BBD96',
     icon: '💻',
     primarySkills: [
-      { name: "Web Development", category: "Development", level: 85, isPrimary: true, description: "Website and app development with AI assistance", color: "#5BBD96" },
-      { name: "React", category: "Development", level: 80, isPrimary: true, description: "Modern web framework development", color: "#5BBD96" },
+      { name: "Web Design", category: "Development", level: 85, isPrimary: true, description: "Website and app development with AI assistance", color: "#5BBD96" },
+      { name: "App Design", category: "Development", level: 80, isPrimary: true, description: "Modern web framework development", color: "#5BBD96" },
     ],
     secondarySkills: [
       { name: "TypeScript", category: "Development", level: 78, isPrimary: false, description: "Type-safe JavaScript development", color: "#5BBD96" },
@@ -429,28 +326,9 @@ export const skillCategories: SkillCategory[] = [
     ]
   },
 
-  // 📊 STRATEGY CATEGORY
-  {
-    id: 'strategy',
-    name: 'Strategy & Marketing',
-    description: 'Strategic thinking, data-driven decision making, and comprehensive campaign planning and execution. Expertise in digital marketing and creative strategy.',
-    color: '#A855F7',
-    icon: '📊',
-    primarySkills: [
-      { name: "Digital Marketing", category: "Strategy", level: 92, isPrimary: true, description: "Marketing campaign design and execution", color: "#A855F7" },
-      { name: "Campaign Strategy", category: "Strategy", level: 93, isPrimary: true, description: "Creative campaign conceptualization", color: "#A855F7" },
-    ],
-    secondarySkills: [
-      { name: "A/B Testing", category: "Strategy", level: 90, isPrimary: false, description: "Data-driven design decision making", color: "#A855F7" },
-      { name: "Brand Strategy", category: "Strategy", level: 87, isPrimary: false, description: "Long-term brand positioning and planning", color: "#A855F7" },
-      { name: "Market Analysis", category: "Strategy", level: 83, isPrimary: false, description: "Competitive analysis and market research", color: "#A855F7" },
-      { name: "Content Strategy", category: "Strategy", level: 85, isPrimary: false, description: "Strategic content planning and execution", color: "#A855F7" },
-    ]
-  },
+
 ];
 
-// 🔄 LEGACY COMPATIBILITY & HELPER FUNCTIONS
-// These maintain compatibility with existing components while providing the new category system
 
 // Generate flat arrays for backward compatibility
 export const PRIMARY_SKILLS: Skill[] = skillCategories.flatMap(category => category.primarySkills);
@@ -725,61 +603,3 @@ export const experience: Experience[] = [
   }
 ];
 
-// Animation configuration
-export const animationConfig = {
-  profileCard: {
-    initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.8 },
-  },
-  navigation: {
-    initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.8, delay: 0.2 },
-  },
-  quickStats: {
-    initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.8, delay: 0.4 },
-  },
-  rightColumn: {
-    currentSection: {
-      initial: { opacity: 0, x: 50 },
-      animate: { opacity: 1, x: 0 },
-      transition: { duration: 0.6 },
-    },
-    contactMethods: {
-      initial: { opacity: 0, x: 50 },
-      animate: { opacity: 1, x: 0 },
-      transition: { duration: 0.8, delay: 0.2 },
-    },
-    missionLog: {
-      initial: { opacity: 0, x: 50 },
-      animate: { opacity: 1, x: 0 },
-      transition: { duration: 0.8, delay: 0.4 },
-    },
-  },
-  sectionTitle: {
-    main: {
-      initial: { opacity: 0, y: -20 },
-      animate: { opacity: 1, y: 0 },
-      transition: { duration: 0.8 },
-    },
-    description: {
-      initial: { opacity: 0, y: -10 },
-      animate: { opacity: 1, y: 0 },
-      transition: { duration: 0.8, delay: 0.2 },
-    },
-  },
-  rocketIcon: {
-    animate: { rotate: [0, 5, -5, 0] },
-    transition: { duration: 4, repeat: Infinity },
-  },
-  navigationButton: {
-    whileHover: { scale: 1.02 },
-    whileTap: { scale: 0.98 },
-  },
-  contactButton: {
-    whileHover: { scale: 1.02 },
-  },
-};

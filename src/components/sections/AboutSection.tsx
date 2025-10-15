@@ -3,6 +3,7 @@ import profileImage from "figma:asset/ccb5263e68f9d44fca6b4c7c752e36a4e840e93f.p
 import { PrimarySpaceHUD, SecondarySpaceHUD, AccentSpaceHUD } from '../SpaceHUD';
 import { SectionLayout, ThreeColumnLayout } from '../SectionLayout';
 import { useResponsive } from '../ui/responsive-context';
+import { profileData } from '../../content';
 
 interface AboutSectionProps {
   isActive: boolean;
@@ -42,10 +43,10 @@ export function AboutSection({ isActive }: AboutSectionProps) {
             <div className="flex flex-col hud-stagger-1" style={{ gap: `${responsive.spacing.lg}px` }}>
               <div className="flex flex-col text-white" style={{ gap: `${responsive.spacing.md}px` }}>
                 <div className="font-bold text-[#facc14] uppercase" style={{ fontSize: `${nameFontSize}px`, lineHeight: '1.1' }}>
-                  <p>KARTHIK PRABAKARAN</p>
+                  <p>{profileData.name}</p>
                 </div>
                 <div className="font-normal text-white uppercase" style={{ fontSize: `${titleFontSize}px`, lineHeight: '1.2' }}>
-                  <p>Sr. Graphic Designer | AI Generalist</p>
+                  <p>{profileData.designation}</p>
                 </div>
               </div>
             </div>

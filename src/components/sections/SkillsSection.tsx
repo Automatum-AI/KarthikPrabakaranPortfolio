@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { SpaceHUD } from '../SpaceHUD';
 import { SectionLayout, ThreeColumnLayout } from '../SectionLayout';
-import { skillCategories, getCategoryById } from '../../content';
+import { skillCategories, getCategoryById, sectionLabels } from '../../content';
 import { Skill } from '../../content/website-content';
 
 interface SkillsSectionProps {
@@ -9,13 +9,27 @@ interface SkillsSectionProps {
 }
 
 export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState('development');
+  // default to the first category if available so a category is always selected
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>(() => (skillCategories && skillCategories.length > 0 ? skillCategories[0].id : ''));
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   // Get the current category
   const currentCategory = useMemo(() => {
     return getCategoryById(selectedCategoryId) || skillCategories[0];
   }, [selectedCategoryId]);
+
+  // If categories change (or the selected id becomes invalid), ensure we always have a valid selection
+  useEffect(() => {
+    if (!selectedCategoryId && skillCategories.length > 0) {
+      setSelectedCategoryId(skillCategories[0].id);
+      return;
+    }
+
+    const exists = skillCategories.some(c => c.id === selectedCategoryId);
+    if (!exists && skillCategories.length > 0) {
+      setSelectedCategoryId(skillCategories[0].id);
+    }
+  }, [skillCategories, selectedCategoryId]);
 
   // Combine primary and secondary skills for display
   const allSkills = useMemo(() => {
@@ -45,12 +59,12 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
               <div className="w-3 h-3 rounded-full animate-pulse"
                    style={{ backgroundColor: currentCategory.color }}></div>
               <span className="text-white font-mono text-lg tracking-wider uppercase">
-                SKILL MATRIX TERMINAL
+                {sectionLabels.skills.terminalTitle}
               </span>
             </div>
             
             <h3 className="hud-stagger-2 text-white/60 font-mono text-sm uppercase tracking-wider">
-              Select Category
+              {sectionLabels.skills.categoryTitle}
             </h3>
             
             <div className="hud-stagger-3 flex flex-col gap-3">
@@ -133,7 +147,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
                     textShadow: `0 0 10px ${currentCategory.color}80`
                   }}
                 >
-                  Primary Skills
+                  {sectionLabels.skills.primarySkillsTitle}
                 </h3>
                 <div className="space-y-2">
                   {currentCategory.primarySkills.map((skill: Skill) => (
@@ -154,7 +168,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
                       textShadow: `0 0 10px ${currentCategory.color}80`
                     }}
                   >
-                    Secondary Skills
+                    {sectionLabels.skills.supportingSkillsTitle}
                   </h3>
                   <div className="space-y-2">
                     {currentCategory.secondarySkills.map((skill: Skill) => (
@@ -171,11 +185,11 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
         
         right={
           <div className="flex flex-col gap-6">
-            <SpaceHUD variant="accent" title="MATRIX STATS" size="medium" glow={true}>
+            <SpaceHUD variant="accent" title={sectionLabels.skills.matrixStatsTitle} size="medium" glow={true}>
               <div className="space-y-4">
                 <div className="stat-item">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="font-mono text-xs text-white/60 uppercase">Total Skills</span>
+                    <span className="font-mono text-xs text-white/60 uppercase">{sectionLabels.skills.totalSkillsLabel}</span>
                     <span className="font-mono text-lg text-white">{stats.total}</span>
                   </div>
                   <div className="w-full bg-gray-800 rounded-full h-1">
@@ -192,7 +206,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
                 
                 <div className="stat-item">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="font-mono text-xs text-white/60 uppercase">Expert Level</span>
+                    <span className="font-mono text-xs text-white/60 uppercase">{sectionLabels.skills.expertLevelLabel}</span>
                     <span className="font-mono text-lg text-white">{stats.expert}</span>
                   </div>
                   <div className="w-full bg-gray-800 rounded-full h-1">
