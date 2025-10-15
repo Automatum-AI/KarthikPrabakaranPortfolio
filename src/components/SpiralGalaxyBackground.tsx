@@ -89,15 +89,14 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
     }
   }, [currentSection]);
 
-  // Realistic spiral galaxy parameters (Milky Way-like) - shared across geometries
-  // Realistic spiral galaxy parameters (like the reference image)
-  const armCount = 2; // Barred spiral structure
-  const maxRadius = 28; // Large enough for dramatic effect
-  const coreRadius = 1.8; // Bright central bulge
-  const bulgeRadius = 5; // Galactic bulge extent
-  const diskRadius = 22; // Main disk extent
-  const spiralTightness = 0.22; // Tight, well-defined spiral
-  const armWidth = 0.8; // Clear arm definition
+  // Realistic spiral galaxy parameters (like Andromeda/Milky Way)
+  const armCount = 2; // Classic two-arm spiral
+  const maxRadius = 30; // Large galaxy extent
+  const coreRadius = 1.2; // Small bright core
+  const bulgeRadius = 4; // Realistic bulge size
+  const diskRadius = 25; // Extended disk
+  const spiralTightness = 0.25; // Realistic spiral tightness
+  const armWidth = 0.6; // Narrow, well-defined arms
 
   // Realistic astronomical color palette (matching reference image)
   const coreWhite = hexToRgb('#FFFFFF'); // Bright white core
@@ -109,9 +108,9 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
   const voidBlack = hexToRgb('#000000'); // Deep space
   const nebulaBlue = hexToRgb('#1E90FF'); // Nebula blue glow
 
-  // Generate realistic spiral galaxy matching reference image
+  // Stunning layered galaxy with multiple visual effects
   const galaxyGeometry = useMemo(() => {
-    const count = 250000; // High density for smooth appearance
+    const count = 200000;
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
     const sizes = new Float32Array(count);
@@ -119,226 +118,133 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
       
-      // Realistic galactic structure with proper density distribution
-      const random1 = Math.random();
-      const random2 = Math.random();
+      // Multi-layered galaxy structure
+      const layerType = Math.random();
+      let x, y, z, color, size, brightness;
       
-      // Exponential disk density profile
-      const radius = -Math.log(1 - random1 * 0.95) * (maxRadius / 4);
-      const clampedRadius = Math.min(radius, maxRadius);
-      
-      let x, y, z, stellarType;
-      
-      if (clampedRadius < coreRadius) {
-        // BRIGHT CENTRAL CORE
-        const coreAngle = random2 * Math.PI * 2;
-        const coreR = clampedRadius * (0.3 + Math.random() * 0.7);
+      if (layerType < 0.4) {
+        // BRIGHT SPIRAL ARMS - highly visible structure
+        const armIndex = Math.floor(Math.random() * 2);
+        const armAngle = armIndex * Math.PI;
+        const radius = 2 + Math.pow(Math.random(), 0.4) * 18;
         
-        x = coreR * Math.cos(coreAngle);
-        z = coreR * Math.sin(coreAngle);
-        y = (Math.random() - 0.5) * 0.2; // Very flat core
+        // Create tight, well-defined spiral
+        const spiralTightness = 0.4;
+        const spiralAngle = armAngle + radius * spiralTightness + (Math.random() - 0.5) * 0.8;
         
-        stellarType = 'core';
+        x = radius * Math.cos(spiralAngle);
+        z = radius * Math.sin(spiralAngle);
+        y = (Math.random() - 0.5) * Math.min(0.8, radius * 0.05);
         
-      } else if (clampedRadius < bulgeRadius) {
-        // GALACTIC BULGE
-        const bulgeAngle = random2 * Math.PI * 2;
-        const bulgeR = clampedRadius + (Math.random() - 0.5) * 0.8;
+        // Bright blue-white spiral arms with high contrast
+        const armBrightness = Math.random();
+        if (armBrightness < 0.3) {
+          // Ultra-bright blue giants
+          color = { r: 0.6, g: 0.8, b: 1.0 };
+          size = 3.0 + Math.random() * 2.0;
+          brightness = 1.0;
+        } else if (armBrightness < 0.7) {
+          // Bright white stars
+          color = { r: 0.9, g: 0.95, b: 1.0 };
+          size = 2.0 + Math.random() * 1.5;
+          brightness = 0.8 + Math.random() * 0.2;
+        } else {
+          // Blue-white stars
+          color = { r: 0.8, g: 0.9, b: 1.0 };
+          size = 1.5 + Math.random() * 1.0;
+          brightness = 0.6 + Math.random() * 0.3;
+        }
         
-        x = bulgeR * Math.cos(bulgeAngle);
-        z = bulgeR * Math.sin(bulgeAngle);
-        // Elliptical bulge shape
-        y = (Math.random() - 0.5) * (1.2 * (1 - clampedRadius / bulgeRadius));
+      } else if (layerType < 0.6) {
+        // GALACTIC CORE - dense central concentration
+        const coreRadius = Math.pow(Math.random(), 1.5) * 4;
+        const coreAngle = Math.random() * Math.PI * 2;
         
-        stellarType = 'bulge';
+        x = coreRadius * Math.cos(coreAngle);
+        z = coreRadius * Math.sin(coreAngle);
+        y = (Math.random() - 0.5) * Math.max(0.3, coreRadius * 0.1);
+        
+        // Warm golden core colors
+        const coreIntensity = 1.0 - (coreRadius / 4);
+        color = {
+          r: 1.0,
+          g: 0.8 + coreIntensity * 0.2,
+          b: 0.4 + coreIntensity * 0.3
+        };
+        size = 1.5 + Math.random() * 1.5 + coreIntensity * 2;
+        brightness = 0.7 + coreIntensity * 0.3;
+        
+      } else if (layerType < 0.85) {
+        // OUTER DISK - general stellar population
+        const radius = 4 + Math.pow(Math.random(), 0.8) * 20;
+        const angle = Math.random() * Math.PI * 2;
+        
+        x = radius * Math.cos(angle);
+        z = radius * Math.sin(angle);
+        y = (Math.random() - 0.5) * Math.max(0.5, radius * 0.08);
+        
+        // Mixed stellar population - warmer colors
+        const stellarType = Math.random();
+        if (stellarType < 0.3) {
+          // Yellow-white stars
+          color = { r: 1.0, g: 0.9, b: 0.7 };
+          size = 1.2 + Math.random() * 0.8;
+          brightness = 0.5 + Math.random() * 0.3;
+        } else if (stellarType < 0.7) {
+          // Orange stars
+          color = { r: 1.0, g: 0.7, b: 0.4 };
+          size = 1.0 + Math.random() * 0.6;
+          brightness = 0.4 + Math.random() * 0.3;
+        } else {
+          // Red stars
+          color = { r: 1.0, g: 0.5, b: 0.2 };
+          size = 0.8 + Math.random() * 0.5;
+          brightness = 0.3 + Math.random() * 0.3;
+        }
         
       } else {
-        // SPIRAL DISK - Create logarithmic spiral arms
-        const baseAngle = random2 * Math.PI * 2;
+        // BACKGROUND FIELD - distant stars and depth
+        const radius = Math.pow(Math.random(), 0.3) * maxRadius;
+        const angle = Math.random() * Math.PI * 2;
         
-        // Calculate spiral pattern
-        let bestArmAngle = baseAngle;
-        let minArmDistance = Infinity;
+        x = radius * Math.cos(angle);
+        z = radius * Math.sin(angle);
+        y = (Math.random() - 0.5) * (2 + radius * 0.1);
         
-        for (let arm = 0; arm < armCount; arm++) {
-          const armStartAngle = (arm / armCount) * Math.PI * 2;
-          // Logarithmic spiral equation
-          const spiralAngle = armStartAngle + spiralTightness * Math.log(clampedRadius / coreRadius);
-          
-          const angleDiff = Math.abs(baseAngle - spiralAngle);
-          const wrappedDiff = Math.min(angleDiff, Math.PI * 2 - angleDiff);
-          
-          if (wrappedDiff < minArmDistance) {
-            minArmDistance = wrappedDiff;
-            bestArmAngle = spiralAngle;
-          }
-        }
-        
-        // Determine if in spiral arm
-        const armProbability = Math.exp(-minArmDistance / armWidth);
-        const inArm = Math.random() < armProbability;
-        
-        let finalAngle;
-        if (inArm) {
-          // In spiral arm
-          finalAngle = bestArmAngle + (Math.random() - 0.5) * armWidth * 0.4;
-          stellarType = 'youngArm';
+        // Faint background stars
+        const bgType = Math.random();
+        if (bgType < 0.5) {
+          // Distant white stars
+          color = { r: 0.9, g: 0.9, b: 1.0 };
+          size = 0.6 + Math.random() * 0.4;
+          brightness = 0.2 + Math.random() * 0.2;
         } else {
-          // Inter-arm region
-          finalAngle = baseAngle + (Math.random() - 0.5) * 0.5;
-          stellarType = 'oldDisk';
+          // Distant orange stars
+          color = { r: 1.0, g: 0.6, b: 0.3 };
+          size = 0.5 + Math.random() * 0.3;
+          brightness = 0.15 + Math.random() * 0.15;
         }
-        
-        x = clampedRadius * Math.cos(finalAngle);
-        z = clampedRadius * Math.sin(finalAngle);
-        
-        // Thin disk structure
-        const scaleHeight = 0.25 * (1 + clampedRadius / maxRadius);
-        y = Math.random() < 0.5 ? 
-          -Math.log(Math.random()) * scaleHeight : 
-          Math.log(Math.random()) * scaleHeight;
       }
+      
+      // Add some supergiants for dramatic effect
+      if (Math.random() < 0.01) {
+        size *= 2.5;
+        brightness *= 1.8;
+        if (Math.random() < 0.6) {
+          color = { r: 0.7, g: 0.8, b: 1.0 }; // Blue supergiant
+        } else {
+          color = { r: 1.0, g: 0.4, b: 0.2 }; // Red supergiant
+        }
+      }
+      
+      // Distance falloff for depth
+      const distanceFromCenter = Math.sqrt(x * x + z * z);
+      const falloffFactor = Math.exp(-distanceFromCenter / 25);
+      brightness *= (0.3 + falloffFactor * 0.7);
       
       positions[i3] = x;
       positions[i3 + 1] = y;
       positions[i3 + 2] = z;
-      
-      // Determine stellar properties
-      const distanceFromCenter = Math.sqrt(x * x + z * z);
-      const normalizedRadius = distanceFromCenter / maxRadius;
-      let isInArm = stellarType === 'youngArm';
-      let color;
-      let size;
-      
-      // REALISTIC STELLAR COLOR SYSTEM - Astronomical accuracy
-      if (stellarType === 'core') {
-        // GALACTIC CORE - Bright central concentration
-        const coreIntensity = 1.0 - (distanceFromCenter / coreRadius);
-        if (Math.random() < 0.7) {
-          // Orange-red evolved giants
-          color = {
-            r: 1.0,
-            g: 0.6 + Math.random() * 0.3,
-            b: 0.3 + Math.random() * 0.2
-          };
-        } else {
-          // Yellow evolved stars
-          color = {
-            r: 1.0,
-            g: 0.9 + Math.random() * 0.1,
-            b: 0.6 + Math.random() * 0.2
-          };
-        }
-        size = 3.5 + Math.random() * 3 + coreIntensity * 2;
-        
-      } else if (stellarType === 'bulge') {
-        // GALACTIC BULGE - Old stellar population
-        if (Math.random() < 0.6) {
-          // K-type orange stars
-          color = {
-            r: 1.0,
-            g: 0.7 + Math.random() * 0.2,
-            b: 0.4 + Math.random() * 0.3
-          };
-        } else {
-          // G-type yellow stars  
-          color = {
-            r: 1.0,
-            g: 0.8 + Math.random() * 0.2,
-            b: 0.6 + Math.random() * 0.3
-          };
-        }
-        size = 2.5 + Math.random() * 2.5;
-        
-      } else if (stellarType === 'youngArm') {
-        // SPIRAL ARM STARS - Young star formation regions
-        if (normalizedRadius < 0.4) {
-          // Inner arm - hot blue and white stars
-          if (Math.random() < 0.5) {
-            // Hot blue O/B stars
-            color = {
-              r: 0.7 + Math.random() * 0.3,
-              g: 0.8 + Math.random() * 0.2,
-              b: 1.0
-            };
-          } else {
-            // White A/F stars
-            color = {
-              r: 0.9 + Math.random() * 0.1,
-              g: 0.9 + Math.random() * 0.1,
-              b: 0.95 + Math.random() * 0.05
-            };
-          }
-          size = 2.5 + Math.random() * 2.5;
-        } else {
-          // Outer arm - more diverse population
-          if (Math.random() < 0.6) {
-            // White stars
-            color = {
-              r: 0.9 + Math.random() * 0.1,
-              g: 0.9 + Math.random() * 0.1,
-              b: 0.95 + Math.random() * 0.05
-            };
-          } else {
-            // Red giants
-            color = {
-              r: 1.0,
-              g: 0.5 + Math.random() * 0.3,
-              b: 0.2 + Math.random() * 0.3
-            };
-          }
-          size = 2 + Math.random() * 2;
-        }
-        
-      } else {
-        // INTER-ARM DISK - Older stellar population
-        if (normalizedRadius < 0.5) {
-          // Inner disk - K-type orange stars
-          color = {
-            r: 1.0,
-            g: 0.6 + Math.random() * 0.3,
-            b: 0.3 + Math.random() * 0.2
-          };
-          size = 1.8 + Math.random() * 1.5;
-        } else {
-          // Outer disk - M-type red dwarfs
-          color = {
-            r: 1.0,
-            g: 0.4 + Math.random() * 0.2,
-            b: 0.1 + Math.random() * 0.2
-          };
-          size = 1.2 + Math.random() * 1.2;
-        }
-      }
-      
-      // Add bright stars for realism
-      if (Math.random() < 0.05) {
-        // Random bright giant stars
-        if (Math.random() < 0.6) {
-          // Blue-white supergiants
-          color = {
-            r: 0.8 + Math.random() * 0.2,
-            g: 0.85 + Math.random() * 0.15,
-            b: 1.0
-          };
-        } else {
-          // Red supergiants
-          color = {
-            r: 1.0,
-            g: 0.4 + Math.random() * 0.2,
-            b: 0.1 + Math.random() * 0.2
-          };
-        }
-        size *= 1.8;
-      }
-      
-      // Add dramatic brightness variation for cinematic sparkle
-      let brightness = 0.7 + Math.random() * 0.3;
-      if (isInArm && Math.random() < 0.1) {
-        // Random bright stars in arms for sparkle effect
-        brightness *= 1.5;
-        size *= 1.3;
-      }
       
       colors[i3] = color.r * brightness;
       colors[i3 + 1] = color.g * brightness;
@@ -352,7 +258,7 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
 
   // Realistic dust lanes and nebular structures
   const dustLanesGeometry = useMemo(() => {
-    const count = 35000; // Moderate density for realistic dust lanes
+    const count = 25000; // Moderate density for realistic dust lanes
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
     const sizes = new Float32Array(count);
@@ -382,27 +288,50 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
         const armStartAngle = (armIndex / armCount) * Math.PI * 2;
         const spiralAngle = armStartAngle + spiralTightness * Math.log(dustRadius / coreRadius);
         
-        // Position dust between arms
+        // Position dust between arms with filamentary structure
         const betweenArms = spiralAngle + Math.PI / armCount; // Halfway between arms
         const dustOffset = (Math.random() - 0.5) * armWidth * 0.8;
-        const finalAngle = betweenArms + dustOffset;
         
-        x = dustRadius * Math.cos(finalAngle) + (Math.random() - 0.5) * 2;
-        z = dustRadius * Math.sin(finalAngle) + (Math.random() - 0.5) * 2;
-        y = (Math.random() - 0.5) * 1.5; // Thin disk
+        // Create filamentary structures using Perlin noise-like distribution
+        const filamentScale = dustRadius * 0.1;
+        const filamentNoise1 = Math.sin(dustRadius * 0.3 + baseAngle * 3) * 0.5;
+        const filamentNoise2 = Math.cos(dustRadius * 0.2 + baseAngle * 2) * 0.3;
+        const filamentOffset = (filamentNoise1 + filamentNoise2) * armWidth * 0.4;
         
-        // Dark dust with distance-based coloring
+        const finalAngle = betweenArms + dustOffset + filamentOffset;
+        
+        // Add realistic dust lane threading and complexity
+        const threadComplexity = Math.sin(dustRadius * 0.5) * Math.cos(baseAngle * 4) * 0.8;
+        
+        x = dustRadius * Math.cos(finalAngle) + threadComplexity;
+        z = dustRadius * Math.sin(finalAngle) + threadComplexity * 0.7;
+        
+        // More realistic vertical distribution - exponential scale height
+        const scaleHeight = 0.8 + dustRadius / maxRadius * 0.5;
+        y = Math.random() < 0.5 ? 
+          -Math.log(Math.random()) * scaleHeight * 0.3 : 
+          Math.log(Math.random()) * scaleHeight * 0.3;
+        
+        // Dark dust with distance-based coloring and realistic opacity gradients
         const dustProgress = dustRadius / maxRadius;
+        const edgeDistance = Math.abs(filamentOffset) / (armWidth * 0.4); // Distance from filament center
+        
+        // Dust lanes are darkest at the center, lighter at edges
+        const filamentOpacity = Math.exp(-edgeDistance * 2.5); // Exponential falloff
+        
         if (dustProgress < 0.3) {
           dustColor = lerpColor(darkDust, warmDust, dustProgress / 0.3);
+          opacity = 0.4 * filamentOpacity + Math.random() * 0.2;
         } else if (dustProgress < 0.7) {
           dustColor = lerpColor(warmDust, coolGas, (dustProgress - 0.3) / 0.4);
+          opacity = 0.3 * filamentOpacity + Math.random() * 0.15;
         } else {
           dustColor = lerpColor(coolGas, molecularGas, (dustProgress - 0.7) / 0.3);
+          opacity = 0.25 * filamentOpacity + Math.random() * 0.1;
         }
         
-        opacity = 0.2 + Math.random() * 0.3;
-        size = 2 + Math.random() * 4;
+        // Size varies with filament density
+        size = (2 + Math.random() * 3) * (0.5 + filamentOpacity * 0.5);
         
       } else if (dustType < 0.8) {
         // MOLECULAR CLOUDS - Dense star-forming regions
@@ -467,37 +396,119 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
     return { positions, colors, sizes };
   }, []);
 
-  // Nebula clouds for color and atmosphere
+  // Dramatic nebula clouds for visual impact
   const nebulaGeometry = useMemo(() => {
-    const count = 6000;
+    const count = 15000;
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
     const sizes = new Float32Array(count);
     
-    const nebulaColors = [
-      hexToRgb('#FF1493'), // Magenta
-      hexToRgb('#8B00FF'), // Violet
-      hexToRgb('#4169E1'), // Royal blue
-      hexToRgb('#FF4500'), // Orange-red
-    ];
+    // Realistic astronomical emission line colors
+    const hAlpha = hexToRgb('#FF4466'); // H-alpha emission (656.3 nm) - red
+    const oiii = hexToRgb('#44FF88'); // [OIII] emission (500.7 nm) - green  
+    const sii = hexToRgb('#FF8844'); // [SII] emission (671.6 nm) - orange-red
+    const hBeta = hexToRgb('#6666FF'); // H-beta emission (486.1 nm) - blue
+    const continuum = hexToRgb('#FFDDAA'); // Stellar continuum - warm white
     
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
       
-      const radius = 3 + Math.random() * 10;
-      const angle = Math.random() * Math.PI * 2;
+      // Place nebulae in spiral arm regions where star formation occurs
+      const nebularType = Math.random();
+      let radius, angle, x, z, y, emissionColor, opacity, size;
       
-      positions[i3] = Math.cos(angle) * radius;
-      positions[i3 + 1] = (Math.random() - 0.5) * 0.8;
-      positions[i3 + 2] = Math.sin(angle) * radius;
+      if (nebularType < 0.6) {
+        // H II REGIONS - Star forming regions in spiral arms
+        radius = bulgeRadius + Math.random() * (diskRadius - bulgeRadius);
+        
+        // Find nearest spiral arm for realistic placement
+        const baseAngle = Math.random() * Math.PI * 2;
+        let nearestArmAngle = baseAngle;
+        let minArmDistance = Infinity;
+        
+        for (let arm = 0; arm < armCount; arm++) {
+          const armStartAngle = (arm / armCount) * Math.PI * 2;
+          const spiralAngle = armStartAngle + spiralTightness * Math.log(radius / coreRadius);
+          const angleDiff = Math.abs(baseAngle - spiralAngle);
+          const wrappedDiff = Math.min(angleDiff, Math.PI * 2 - angleDiff);
+          
+          if (wrappedDiff < minArmDistance) {
+            minArmDistance = wrappedDiff;
+            nearestArmAngle = spiralAngle;
+          }
+        }
+        
+        // Place in spiral arms with some scatter
+        angle = nearestArmAngle + (Math.random() - 0.5) * armWidth * 0.6;
+        
+        x = radius * Math.cos(angle) + (Math.random() - 0.5) * 2;
+        z = radius * Math.sin(angle) + (Math.random() - 0.5) * 2;
+        y = (Math.random() - 0.5) * 0.8; // Thin disk distribution
+        
+        // Mixed emission lines typical of H II regions
+        if (Math.random() < 0.7) {
+          emissionColor = hAlpha; // Dominant H-alpha
+          opacity = 0.3 + Math.random() * 0.4;
+        } else if (Math.random() < 0.85) {
+          emissionColor = lerpColor(hAlpha, oiii, Math.random() * 0.4); // H-alpha with OIII
+          opacity = 0.2 + Math.random() * 0.3;
+        } else {
+          emissionColor = sii; // Sulfur emission
+          opacity = 0.15 + Math.random() * 0.25;
+        }
+        
+        size = 3 + Math.random() * 6; // Large diffuse regions
+        
+      } else if (nebularType < 0.85) {
+        // PLANETARY NEBULAE - Evolved stellar remnants
+        radius = coreRadius + Math.random() * (maxRadius - coreRadius);
+        angle = Math.random() * Math.PI * 2;
+        
+        x = radius * Math.cos(angle) + (Math.random() - 0.5) * 1;
+        z = radius * Math.sin(angle) + (Math.random() - 0.5) * 1;
+        y = (Math.random() - 0.5) * 2; // Slightly thicker distribution
+        
+        // Characteristic planetary nebula colors
+        if (Math.random() < 0.6) {
+          emissionColor = oiii; // Strong [OIII] emission - green
+          opacity = 0.4 + Math.random() * 0.3;
+        } else {
+          emissionColor = lerpColor(hAlpha, hBeta, Math.random()); // Balmer lines
+          opacity = 0.25 + Math.random() * 0.25;
+        }
+        
+        size = 1.5 + Math.random() * 3; // Smaller, more compact
+        
+      } else {
+        // SUPERNOVA REMNANTS - Shock-heated gas
+        radius = bulgeRadius + Math.random() * (diskRadius - bulgeRadius) * 0.8;
+        angle = Math.random() * Math.PI * 2;
+        
+        x = radius * Math.cos(angle) + (Math.random() - 0.5) * 4;
+        z = radius * Math.sin(angle) + (Math.random() - 0.5) * 4;
+        y = (Math.random() - 0.5) * 1.5;
+        
+        // Shock-heated emission (higher excitation)
+        if (Math.random() < 0.5) {
+          emissionColor = lerpColor(oiii, hBeta, Math.random() * 0.6); // High excitation
+          opacity = 0.2 + Math.random() * 0.3;
+        } else {
+          emissionColor = sii; // Shock-heated sulfur
+          opacity = 0.15 + Math.random() * 0.2;
+        }
+        
+        size = 4 + Math.random() * 8; // Large expanding shells
+      }
       
-      const color = nebulaColors[Math.floor(Math.random() * nebulaColors.length)];
-      const opacity = Math.random() * 0.25;
-      colors[i3] = color.r * opacity;
-      colors[i3 + 1] = color.g * opacity;
-      colors[i3 + 2] = color.b * opacity;
+      positions[i3] = x;
+      positions[i3 + 1] = y;
+      positions[i3 + 2] = z;
       
-      sizes[i] = Math.random() * 5 + 1;
+      colors[i3] = emissionColor.r * opacity;
+      colors[i3 + 1] = emissionColor.g * opacity;
+      colors[i3 + 2] = emissionColor.b * opacity;
+      
+      sizes[i] = size;
     }
     
     return { positions, colors, sizes };
@@ -660,13 +671,16 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
       galaxyRef.current.rotation.x = Math.sin(t * 0.08) * 0.03 * (1 - scrollProgress * 0.7);
       galaxyRef.current.rotation.z = Math.cos(t * 0.05) * 0.02 * (1 - scrollProgress * 0.8);
       
-      // Gentle scale variation for depth perception
-      const naturalVariation = 1 + Math.sin(t * 0.25) * 0.015;
-      galaxyRef.current.scale.setScalar(naturalVariation);
+      // Dramatic scale pulsing for cinematic breathing effect
+      const dramaticVariation = 1 + Math.sin(t * 0.15) * 0.08 * (1 - scrollProgress * 0.5);
+      galaxyRef.current.scale.setScalar(dramaticVariation);
       
-      // Dynamic viewing angle based on zoom progress
-      const viewingAngle = scrollProgress * 0.12;
-      galaxyRef.current.rotation.z = Math.sin(t * 0.1) * 0.006 * (1 - scrollProgress) + viewingAngle;
+      // Enhanced dynamic viewing angle with orbital motion
+      const viewingAngle = scrollProgress * 0.25 + t * 0.02 * (1 - scrollProgress);
+      const tiltVariation = Math.sin(t * 0.08) * 0.15 * (1 - scrollProgress);
+      galaxyRef.current.rotation.z = tiltVariation + viewingAngle;
+      galaxyRef.current.rotation.x += Math.cos(t * 0.05) * 0.01 * (1 - scrollProgress);
+      galaxyRef.current.rotation.y += Math.sin(t * 0.03) * 0.008 * (1 - scrollProgress);
     }
     
     if (innerCoreRef.current) {
@@ -737,13 +751,14 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.5}
+          size={0.3}
           sizeAttenuation={true}
           depthWrite={false}
           vertexColors={true}
-          blending={THREE.AdditiveBlending}
+          blending={THREE.MultiplyBlending}
           transparent={true}
-          opacity={0.6}
+          opacity={0.7}
+          fog={false}
         />
       </points>
 
@@ -770,13 +785,14 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.2}
+          size={0.1}
           sizeAttenuation={true}
           depthWrite={false}
           vertexColors={true}
           blending={THREE.AdditiveBlending}
           transparent={true}
-          opacity={0.2}
+          opacity={0.3}
+          fog={false}
         />
       </points>
 
@@ -803,13 +819,14 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.3}
+          size={0.08}
           sizeAttenuation={true}
           depthWrite={false}
           vertexColors={true}
           blending={THREE.AdditiveBlending}
           transparent={true}
-          opacity={0.15}
+          opacity={0.25}
+          fog={false}
         />
       </points>
 
@@ -836,61 +853,19 @@ function PhotorealisticGalaxy({ scrollProgress, currentSection = 'home' }: Galax
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.1}
+          size={0.12}
           sizeAttenuation={true}
           depthWrite={false}
           vertexColors={true}
           blending={THREE.AdditiveBlending}
           transparent={true}
-          opacity={0.95}
+          opacity={1.1}
+          fog={false}
         />
       </points>
       
-      {/* 3D Volumetric Core System */}
+      {/* No volumetric core - purely particle-based galaxy */}
       <group ref={volumetricCoreRef}>
-        {/* Bright galactic core - concentrated starlight */}
-        <mesh position={[0, 0, 0]} scale={[1, 1, 1]}>
-          <sphereGeometry args={[0.4, 32, 32]} />
-          <meshBasicMaterial
-            color="#FFF8DC"
-            transparent={true}
-            opacity={0.9}
-            blending={THREE.AdditiveBlending}
-          />
-        </mesh>
-        
-        {/* Warm stellar bulge */}
-        <mesh position={[0, 0, 0]} scale={[1, 0.8, 1]}>
-          <sphereGeometry args={[0.8, 32, 32]} />
-          <meshBasicMaterial
-            color="#FFB366"
-            transparent={true}
-            opacity={0.7}
-            blending={THREE.AdditiveBlending}
-          />
-        </mesh>
-        
-        {/* Extended galactic halo */}
-        <mesh position={[0, 0, 0]} scale={[1, 0.9, 1]}>
-          <sphereGeometry args={[1.2, 32, 32]} />
-          <meshBasicMaterial
-            color="#FFA500"
-            transparent={true}
-            opacity={0.5}
-            blending={THREE.AdditiveBlending}
-          />
-        </mesh>
-        
-        {/* Outer stellar halo glow */}
-        <mesh position={[0, 0, 0]} scale={[1, 0.95, 1]}>
-          <sphereGeometry args={[1.8, 32, 32]} />
-          <meshBasicMaterial
-            color="#B0C4DE"
-            transparent={true}
-            opacity={0.3}
-            blending={THREE.AdditiveBlending}
-          />
-        </mesh>
         
         {/* Counter-rotating inner core */}
         <group ref={innerCoreRef}>

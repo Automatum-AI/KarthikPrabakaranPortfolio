@@ -38,19 +38,19 @@ export function AboutSection({ isActive }: AboutSectionProps) {
     <SectionLayout isActive={isActive} sectionId="about">
       <ThreeColumnLayout
         left={
-          <div className="flex flex-col h-full justify-between" style={{ gap: `${responsive.spacing.lg}px` }}>
+          <div className="flex flex-col h-full justify-between">
             <div className="flex flex-col hud-stagger-1" style={{ gap: `${responsive.spacing.lg}px` }}>
               <div className="flex flex-col text-white" style={{ gap: `${responsive.spacing.md}px` }}>
-                <div className="font-bold text-[#facc14] uppercase" style={{ fontSize: `${nameFontSize}px` }}>
+                <div className="font-bold text-[#facc14] uppercase" style={{ fontSize: `${nameFontSize}px`, lineHeight: '1.1' }}>
                   <p>KARTHIK PRABAKARAN</p>
                 </div>
-                <div className="font-normal text-white uppercase" style={{ fontSize: `${titleFontSize}px` }}>
+                <div className="font-normal text-white uppercase" style={{ fontSize: `${titleFontSize}px`, lineHeight: '1.2' }}>
                   <p>Sr. Graphic Designer | AI Generalist</p>
                 </div>
               </div>
             </div>
             
-            <div className="flex hud-stagger-2" style={{ gap: `${gapSize * 2}px` }}>
+            <div className="flex hud-stagger-2" style={{ gap: `${Math.min(gapSize * 2, responsive.spacing.lg)}px` }}>
               <div className="flex flex-col text-white" style={{ gap: `${responsive.spacing.sm}px` }}>
                 <div className="font-medium" style={{ fontSize: `${responsive.fontSize.base}px` }}>
                   <p>EXPERIENCE</p>
@@ -79,15 +79,19 @@ export function AboutSection({ isActive }: AboutSectionProps) {
                   link.click();
                   document.body.removeChild(link);
                 }}
-                className="font-mono uppercase tracking-widest transition-all duration-300 relative overflow-hidden w-full"
+                className="font-mono uppercase tracking-wide transition-all duration-300 relative overflow-hidden w-full"
                 style={{
                   border: '2px solid #FACC14',
                   backgroundColor: 'black',
                   color: '#FACC14',
                   boxShadow: '0 0 20px #FACC1440, inset 0 0 10px #FACC1420',
                   textShadow: '0 0 8px #FACC14',
-                  padding: `${responsive.spacing.sm}px ${responsive.spacing.lg}px`,
-                  fontSize: `${responsive.fontSize.base * 0.75}px`
+                  padding: `${responsive.spacing.sm}px ${Math.max(responsive.spacing.sm, 8)}px`,
+                  fontSize: `${Math.max(responsive.fontSize.base * 0.65, 10)}px`,
+                  minHeight: '40px',
+                  whiteSpace: 'nowrap',
+                  maxWidth: '100%',
+                  overflow: 'hidden'
                 }}
               >
                 <span className="relative z-10 flex items-center justify-center" style={{ gap: `${responsive.spacing.xs}px` }}>
@@ -101,9 +105,9 @@ export function AboutSection({ isActive }: AboutSectionProps) {
                     animation: 'advanced-scan-horizontal 3s ease-in-out infinite'
                   }}
                 />
-              </button>
+                </button>
+              </div>
             </div>
-          </div>
         }
         middle={
           <div className="flex flex-col h-full" style={{ gap: `${responsive.spacing.lg}px` }}>

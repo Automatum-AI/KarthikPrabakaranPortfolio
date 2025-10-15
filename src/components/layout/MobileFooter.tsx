@@ -31,15 +31,15 @@ export function MobileFooter() {
         {coordData.map((coord, index) => (
           <div
             key={coord.label}
-            className="relative px-2 py-1 font-mono uppercase tracking-wider overflow-hidden"
+            className="relative px-1.5 py-0.5 font-mono uppercase tracking-wide overflow-hidden"
             style={{
               backgroundColor: 'rgba(0, 0, 0, 0.85)',
               border: `1px solid ${coord.color}60`,
               clipPath: 'polygon(0 0, calc(100% - 2px) 0, 100% 2px, 100% 100%, 2px 100%, 0 calc(100% - 2px))',
-              boxShadow: `0 0 8px ${coord.color}30, inset 0 0 4px ${coord.color}20`,
+              boxShadow: `0 0 6px ${coord.color}30, inset 0 0 3px ${coord.color}20`,
               color: coord.color,
-              textShadow: `0 0 6px ${coord.color}`,
-              fontSize: 'clamp(8px, 2.5vw, 10px)',
+              textShadow: `0 0 4px ${coord.color}`,
+              fontSize: 'clamp(7px, 2vw, 9px)',
               backdropFilter: 'blur(10px)'
             }}
           >

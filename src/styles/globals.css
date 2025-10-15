@@ -43,36 +43,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-/* Responsive font size scaling for smaller desktop screens */
-@media (max-width: 1400px) {
-  :root {
-    --font-size: 15px;
-  }
-}
-
-@media (max-width: 1200px) {
-  :root {
-    --font-size: 14px;
-  }
-}
-
-@media (max-width: 1024px) {
-  :root {
-    --font-size: 14px;
-  }
-}
-
-@media (max-width: 768px) {
-  :root {
-    --font-size: 13px;
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --font-size: 12px;
-  }
-}
+/* Font size controlled by JavaScript responsive context */
 
 .dark {
   --background: transparent;
@@ -156,51 +127,7 @@
   --text-base: 1rem;
 }
 
-/* Responsive text size scaling */
-@media (max-width: 1400px) {
-  @theme {
-    --text-2xl: 1.4rem;
-    --text-xl: 1.2rem;
-    --text-lg: 1.1rem;
-    --text-base: 1rem;
-  }
-}
-
-@media (max-width: 1200px) {
-  @theme {
-    --text-2xl: 1.3rem;
-    --text-xl: 1.15rem;
-    --text-lg: 1.05rem;
-    --text-base: 0.95rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  @theme {
-    --text-2xl: 1.25rem;
-    --text-xl: 1.125rem;
-    --text-lg: 1rem;
-    --text-base: 0.9rem;
-  }
-}
-
-@media (max-width: 768px) {
-  @theme {
-    --text-2xl: 1.2rem;
-    --text-xl: 1.1rem;
-    --text-lg: 0.95rem;
-    --text-base: 0.875rem;
-  }
-}
-
-@media (max-width: 640px) {
-  @theme {
-    --text-2xl: 1.125rem;
-    --text-xl: 1rem;
-    --text-lg: 0.9rem;
-    --text-base: 0.85rem;
-  }
-}
+/* Text sizes controlled by JavaScript responsive context */
 
 @layer base {
   * {
@@ -297,10 +224,9 @@ html {
     position: relative;
   }
   
-  /* Header - Fixed height at top */
+  /* Header - Height controlled by JavaScript */
   .app-header {
     flex-shrink: 0;
-    height: 90px;
     width: 100%;
     z-index: 50;
     background: transparent;
@@ -332,25 +258,15 @@ html {
     display: none;
   }
   
-  /* Footer - Fixed height at bottom */
+  /* Footer - Height controlled by JavaScript */
   .app-footer {
     flex-shrink: 0;
-    height: 80px;
     width: 100%;
     z-index: 50;
     background: transparent;
     pointer-events: none;
     position: relative;
-  }
-  
-  /* Mobile footer - smaller height */
-  @media (max-width: 1024px) {
-    .app-footer {
-      height: 40px;
-    }
-  }
-  
-  .app-footer > * {
+  }  .app-footer > * {
     pointer-events: auto;
   }
   
@@ -358,6 +274,8 @@ html {
   .app-section {
     scroll-snap-align: start;
     height: 100%;
+    min-height: 100%;
+    max-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -365,6 +283,7 @@ html {
     position: relative;
     background: transparent;
     isolation: isolate;
+    overflow: hidden;
   }
 
   /* Body layout - main content area between header and footer */
@@ -387,8 +306,11 @@ html {
   .section-wrapper {
     width: 100%;
     height: 100%;
+    max-height: 100%;
     position: relative;
     opacity: 1;
+    overflow: hidden;
+    box-sizing: border-box;
   }
   
   /* Show sections when active with reveal animations */
@@ -445,13 +367,11 @@ html {
     hyphens: auto;
   }
   
-  /* Better responsive text wrapping */
-  @media (max-width: 1200px) {
-    h1, h2, h3, h4, h5, h6 {
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      hyphens: auto;
-    }
+  /* Text wrapping handled by JavaScript responsive context */
+  h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   /* Custom scrollbar styles for SpaceHUD content */

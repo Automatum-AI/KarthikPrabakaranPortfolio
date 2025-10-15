@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useResponsive } from '../ui/responsive-context';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { HomeSection } from '../sections/HomeSection';
@@ -9,6 +10,7 @@ import { ExperienceSection } from '../sections/ExperienceSection';
 import { ContactSection } from '../sections/ContactSection';
 
 export function DesktopApp() {
+  const responsive = useResponsive();
   const [currentSection, setCurrentSection] = useState('Home');
   const [prevSection, setPrevSection] = useState('Home');
   
@@ -53,7 +55,7 @@ export function DesktopApp() {
       });
 
       if (mostVisibleSection) {
-        const id = mostVisibleSection.id;
+        const id = (mostVisibleSection as HTMLElement).id;
         const name = id.charAt(0).toUpperCase() + id.slice(1);
         
         // Only update if different from current
@@ -84,7 +86,10 @@ export function DesktopApp() {
   return (
     <div className="app-container">
       
-      <div className="app-header">
+      <div 
+        className="app-header" 
+        style={{ height: `${responsive.layout.headerHeight}px` }}
+      >
         <Header 
           activeSection={currentSection} 
           onSectionChange={scrollToSection}
@@ -117,7 +122,10 @@ export function DesktopApp() {
         </div>
       </div>
       
-      <div className="app-footer">
+      <div 
+        className="app-footer"
+        style={{ height: `${responsive.layout.footerHeight}px` }}
+      >
         <Footer />
       </div>
     </div>

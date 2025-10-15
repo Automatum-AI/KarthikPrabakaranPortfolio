@@ -76,6 +76,8 @@ export function ThreeColumnLayout({ left, middle, right, className = '' }: Three
     gridTemplateColumns: gridColumns,
     gap: `${responsive.layout.columnGap}px`,
     height: '100%',
+    minHeight: '100%',
+    maxHeight: '100%',
     width: '100%',
     maxWidth: '100%',
     boxSizing: 'border-box',
@@ -84,13 +86,15 @@ export function ThreeColumnLayout({ left, middle, right, className = '' }: Three
     paddingRight: `${responsive.layout.sectionPadding.right}px`,
     paddingBottom: `${responsive.layout.sectionPadding.bottom}px`,
     paddingLeft: `${responsive.layout.sectionPadding.left}px`,
+    overflow: 'hidden',
   };
   
   const columnStyle: React.CSSProperties = {
     display: responsive.isMobile && (left || right) ? 'none' : 'flex',
     flexDirection: 'column',
     height: '100%',
-    overflow: 'visible',
+    maxHeight: '100%',
+    overflow: 'hidden',
     gap: `${responsive.layout.columnGap}px`,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',

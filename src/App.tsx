@@ -2,7 +2,7 @@ import React from 'react';
 import { ResponsiveProvider, useResponsive } from './components/ui/responsive-context';
 import { DesktopApp } from './components/layout/DesktopApp';
 import { MobileApp } from './components/layout/MobileApp';
-import { SpiralGalaxyBackground } from './components/SpiralGalaxyBackground';
+import BlackHoleBackground from './components/BlackHoleBackground';
 
 function AppContent() {
   const { isMobile, isReady } = useResponsive();
@@ -20,8 +20,8 @@ function AppContent() {
   );
 }
 
-// Separate component for Galaxy that's mounted outside everything else
-class GalaxyRoot extends React.Component<{}, { scrollProgress: number; currentSection: string }> {
+// Separate component for Black Hole that's mounted outside everything else
+class BlackHoleRoot extends React.Component<{}, { scrollProgress: number; currentSection: string }> {
   private bodyElement: Element | null = null;
   private timeoutId: NodeJS.Timeout | null = null;
 
@@ -127,7 +127,7 @@ class GalaxyRoot extends React.Component<{}, { scrollProgress: number; currentSe
 
   render() {
     return (
-      <SpiralGalaxyBackground 
+      <BlackHoleBackground 
         scrollProgress={this.state.scrollProgress} 
         currentSection={this.state.currentSection}
       />
@@ -138,8 +138,8 @@ class GalaxyRoot extends React.Component<{}, { scrollProgress: number; currentSe
 export default function App() {
   return (
     <>
-      {/* Galaxy is mounted once as a class component - maximum stability */}
-      <GalaxyRoot />
+      {/* Black Hole is mounted once as a class component - maximum stability */}
+      <BlackHoleRoot />
       
       <ResponsiveProvider>
         <AppContent />

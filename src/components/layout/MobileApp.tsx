@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useResponsive } from '../ui/responsive-context';
 import { MobileHeader } from './MobileHeader';
 import { MobileFooter } from './MobileFooter';
 import { MobileHomeSection } from '../sections/mobile/MobileHomeSection';
@@ -9,6 +10,7 @@ import { MobileExperienceSection } from '../sections/mobile/MobileExperienceSect
 import { MobileContactSection } from '../sections/mobile/MobileContactSection';
 
 export function MobileApp() {
+  const responsive = useResponsive();
   const [currentSection, setCurrentSection] = useState('Home');
   const [activeSections, setActiveSections] = useState<Set<string>>(new Set(['Home']));
   const [contentVisible, setContentVisible] = useState(true); // Start as true for initial load
@@ -82,6 +84,7 @@ export function MobileApp() {
       <div 
         className="app-header"
         style={{
+          height: `${responsive.layout.headerHeight}px`,
           background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 70%, rgba(0, 0, 0, 0.3) 100%)'
         }}
       >
@@ -121,6 +124,7 @@ export function MobileApp() {
       <div 
         className="app-footer"
         style={{
+          height: `${responsive.layout.footerHeight}px`,
           background: 'linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 70%, rgba(0, 0, 0, 0.3) 100%)'
         }}
       >
