@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { SpaceHUD } from '../SpaceHUD';
 import { SectionLayout, ThreeColumnLayout } from '../SectionLayout';
 import { skillCategories, getCategoryById, sectionLabels } from '../../content';
@@ -9,27 +9,13 @@ interface SkillsSectionProps {
 }
 
 export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
-  // default to the first category if available so a category is always selected
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>(() => (skillCategories && skillCategories.length > 0 ? skillCategories[0].id : ''));
+  const [selectedCategoryId, setSelectedCategoryId] = useState('development');
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   // Get the current category
   const currentCategory = useMemo(() => {
     return getCategoryById(selectedCategoryId) || skillCategories[0];
   }, [selectedCategoryId]);
-
-  // If categories change (or the selected id becomes invalid), ensure we always have a valid selection
-  useEffect(() => {
-    if (!selectedCategoryId && skillCategories.length > 0) {
-      setSelectedCategoryId(skillCategories[0].id);
-      return;
-    }
-
-    const exists = skillCategories.some(c => c.id === selectedCategoryId);
-    if (!exists && skillCategories.length > 0) {
-      setSelectedCategoryId(skillCategories[0].id);
-    }
-  }, [skillCategories, selectedCategoryId]);
 
   // Combine primary and secondary skills for display
   const allSkills = useMemo(() => {

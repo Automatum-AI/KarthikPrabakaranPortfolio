@@ -310,9 +310,9 @@ export default function BlackHoleSimulation({
       const camY = Math.sin(t * 0.02) * 0.15;
       const camZ = 6.5 + Math.cos(t * 0.02) * 0.06;
       shaderMat.uniforms.uCameraPos.value.set(camX, camY, camZ);
-      shaderMat.uniforms.uMaxIterations.value = Math.min(1024, Math.max(64, ${maxIterations}));
-      shaderMat.uniforms.uStepSize.value = ${stepSize};
-      shaderMat.uniforms.uAccretionToggle.value = ${accretion ? 1.0 : 0.0};
+      shaderMat.uniforms.uMaxIterations.value = Math.min(1024, Math.max(64, maxIterations));
+      shaderMat.uniforms.uStepSize.value = stepSize;
+      shaderMat.uniforms.uAccretionToggle.value = accretion ? 1.0 : 0.0;
     });
 
     return <FullscreenQuad material={shaderMat} />;
