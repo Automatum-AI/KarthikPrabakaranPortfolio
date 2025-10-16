@@ -1,71 +1,17 @@
 import React, { useState } from 'react';
 import { SpaceHUD } from '../../SpaceHUD';
+import { skillCategories, getCategoryById, SkillCategory, Skill } from '../../../content/website-content';
 
 interface MobileSkillsSectionProps {
   isActive: boolean;
 }
 
 export function MobileSkillsSection({ isActive }: MobileSkillsSectionProps) {
-  const [selectedCategory, setSelectedCategory] = useState('Design');
-  
-  const skillCategories = {
-    'Design': {
-      title: 'DESIGN SKILLS',
-      color: '#20DBE9',
-      hudVariant: 'accent' as const,
-      summary: 'Creative visual solutions with a focus on user experience, brand identity, and modern design principles.',
-      skills: [
-        { name: 'Graphic Design', level: 95 },
-        { name: 'UI/UX Design', level: 92 },
-        { name: 'Brand Identity', level: 88 },
-        { name: 'Typography', level: 90 },
-        { name: 'Logo Design', level: 94 }
-      ]
-    },
-    'Development': {
-      title: 'DEVELOPMENT SKILLS',
-      color: '#5BBD96',
-      hudVariant: 'secondary' as const,
-      summary: 'Modern web development using cutting-edge frameworks and best practices for scalable applications.',
-      skills: [
-        { name: 'React Development', level: 93 },
-        { name: 'TypeScript', level: 89 },
-        { name: 'CSS/Tailwind', level: 91 },
-        { name: 'JavaScript', level: 94 },
-        { name: 'HTML5', level: 96 }
-      ]
-    },
-    'AI & Tech': {
-      title: 'AI & TECH SKILLS',
-      color: '#FACC14',
-      hudVariant: 'primary' as const,
-      summary: 'Leveraging artificial intelligence and automation to enhance creative workflows and deliver innovative solutions.',
-      skills: [
-        { name: 'AI-Assisted Design', level: 88 },
-        { name: 'Prompt Engineering', level: 91 },
-        { name: 'Workflow Automation', level: 89 },
-        { name: 'Content Generation', level: 86 },
-        { name: 'Machine Learning', level: 83 }
-      ]
-    },
-    'Tools': {
-      title: 'TOOLS & SOFTWARE',
-      color: '#F59E0B',
-      hudVariant: 'warning' as const,
-      summary: 'Professional mastery of industry-standard tools and software for design, development, and collaboration.',
-      skills: [
-        { name: 'Adobe Creative Suite', level: 96 },
-        { name: 'Figma/Sketch', level: 94 },
-        { name: 'After Effects', level: 88 },
-        { name: 'Blender/C4D', level: 85 },
-        { name: 'Git/GitHub', level: 92 }
-      ]
-    }
-  };
-
-  const currentCategory = skillCategories[selectedCategory];
+  const [selectedCategoryId, setSelectedCategoryId] = useState(skillCategories[0]?.id || '');
+  const currentCategory = getCategoryById(selectedCategoryId) || skillCategories[0];
   const avgMastery = Math.round(
-    currentCategory.skills.reduce((sum, skill) => sum + skill.level, 0) / currentCategory.skills.length
+    [...currentCategory.primarySkills, ...currentCategory.secondarySkills].reduce((sum, skill) => sum + skill.level, 0) /
+    ([...currentCategory.primarySkills, ...currentCategory.secondarySkills].length || 1)
   );
 
   return (
@@ -95,33 +41,32 @@ export function MobileSkillsSection({ isActive }: MobileSkillsSectionProps) {
               Select Category
             </div>
             <div className="grid grid-cols-2 gap-2">
-              {Object.keys(skillCategories).map((category) => {
-                const catData = skillCategories[category];
-                const isSelected = selectedCategory === category;
+              {skillCategories.map((category: SkillCategory) => {
+                const isSelected = selectedCategoryId === category.id;
                 return (
                   <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
+                    key={category.id}
+                    onClick={() => setSelectedCategoryId(category.id)}
                     className={`px-3 py-2 font-mono uppercase tracking-wider transition-all duration-300 relative overflow-hidden ${
                       isSelected ? 'bg-black' : 'bg-black/30'
                     }`}
                     style={{
-                      border: `2px solid ${catData.color}`,
-                      color: isSelected ? 'white' : catData.color,
+                      border: `2px solid ${category.color}`,
+                      color: isSelected ? 'white' : category.color,
                       opacity: isSelected ? 1 : 0.5,
                       boxShadow: isSelected 
-                        ? `0 0 20px ${catData.color}60, inset 0 0 15px ${catData.color}20`
+                        ? `0 0 20px ${category.color}60, inset 0 0 15px ${category.color}20`
                         : 'none',
-                      textShadow: isSelected ? `0 0 8px ${catData.color}` : 'none',
+                      textShadow: isSelected ? `0 0 8px ${category.color}` : 'none',
                       fontSize: 'clamp(9px, 2.8vw, 11px)'
                     }}
                   >
-                    <span className="relative z-10">{category}</span>
+                    <span className="relative z-10">{category.name}</span>
                     {isSelected && (
                       <div 
                         className="absolute inset-0 opacity-30"
                         style={{
-                          background: `linear-gradient(90deg, transparent, ${catData.color}40, transparent)`,
+                          background: `linear-gradient(90deg, transparent, ${category.color}40, transparent)`,
                           animation: 'advanced-scan-horizontal 2s ease-in-out infinite'
                         }}
                       />
@@ -143,7 +88,7 @@ export function MobileSkillsSection({ isActive }: MobileSkillsSectionProps) {
                 fontSize: 'clamp(11px, 3.2vw, 13px)'
               }}
             >
-              {currentCategory.summary}
+              {currentCategory.description}
             </div>
           </div>
 
@@ -158,7 +103,7 @@ export function MobileSkillsSection({ isActive }: MobileSkillsSectionProps) {
               Primary Skills
             </div>
             <div className="flex flex-col gap-2">
-              {currentCategory.skills.slice(0, 3).map((skill) => (
+              {currentCategory.primarySkills.map((skill: Skill) => (
                 <div key={skill.name} 
                      className="flex items-center justify-between"
                      style={{ fontSize: 'clamp(12px, 3.5vw, 14px)' }}>
@@ -189,7 +134,7 @@ export function MobileSkillsSection({ isActive }: MobileSkillsSectionProps) {
               Secondary Skills
             </div>
             <div className="flex flex-col gap-2">
-              {currentCategory.skills.slice(3, 5).map((skill) => (
+              {currentCategory.secondarySkills.map((skill: Skill) => (
                 <div key={skill.name} 
                      className="flex items-center justify-between"
                      style={{ fontSize: 'clamp(12px, 3.5vw, 14px)' }}>
@@ -211,7 +156,7 @@ export function MobileSkillsSection({ isActive }: MobileSkillsSectionProps) {
 
           {/* Stats */}
           <div className="hud-stagger-6 mb-4">
-            <SpaceHUD variant={currentCategory.hudVariant} title="STATS" size="small" glow={true}>
+              <SpaceHUD variant="accent" title="STATS" size="small" glow={true}>
               <div className="grid grid-cols-3 gap-2">
                 <div className="border p-2"
                      style={{ 
@@ -228,7 +173,6 @@ export function MobileSkillsSection({ isActive }: MobileSkillsSectionProps) {
                     {avgMastery}%
                   </div>
                 </div>
-                
                 <div className="border p-2"
                      style={{ 
                        backgroundColor: `${currentCategory.color}10`,
@@ -241,10 +185,9 @@ export function MobileSkillsSection({ isActive }: MobileSkillsSectionProps) {
                     fontSize: 'clamp(16px, 5vw, 20px)',
                     fontWeight: 900
                   }}>
-                    {currentCategory.skills.length}
+                    {[...currentCategory.primarySkills, ...currentCategory.secondarySkills].length}
                   </div>
                 </div>
-                
                 <div className="border p-2"
                      style={{ 
                        backgroundColor: `${currentCategory.color}10`,
@@ -257,7 +200,7 @@ export function MobileSkillsSection({ isActive }: MobileSkillsSectionProps) {
                     fontSize: 'clamp(16px, 5vw, 20px)',
                     fontWeight: 900
                   }}>
-                    {currentCategory.skills.filter(s => s.level >= 90).length}
+                    {[...currentCategory.primarySkills, ...currentCategory.secondarySkills].filter(s => s.level >= 90).length}
                   </div>
                 </div>
               </div>

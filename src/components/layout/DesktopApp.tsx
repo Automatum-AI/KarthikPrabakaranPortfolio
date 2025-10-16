@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import DriftingStarfield from '../DriftingStarfield';
 import { useResponsive } from '../ui/responsive-context';
 import { Header } from './Header';
 import { Footer } from './Footer';
@@ -85,6 +86,7 @@ export function DesktopApp() {
 
   return (
     <div className="app-container">
+      <DriftingStarfield />
       
       <div 
         className="app-header" 

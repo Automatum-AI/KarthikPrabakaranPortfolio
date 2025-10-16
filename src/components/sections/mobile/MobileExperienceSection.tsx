@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SpaceHUD } from '../../SpaceHUD';
 import { experience } from '../../../content/website-content';
+import { sectionLabels } from '../../../content/website-content';
 
 interface MobileExperienceSectionProps {
   isActive: boolean;
@@ -46,14 +47,7 @@ export function MobileExperienceSection({ isActive }: MobileExperienceSectionPro
         <div className="flex-1 flex flex-col justify-evenly gap-3 overflow-y-auto">
           {/* Header */}
           <div className="hud-stagger-1">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 rounded-full animate-pulse"
-                   style={{ backgroundColor: getTypeColor(selectedExp.type) }}></div>
-              <span className="text-white font-mono uppercase tracking-wider"
-                    style={{ fontSize: 'clamp(12px, 3.5vw, 16px)' }}>
-                EXPERIENCE
-              </span>
-            </div>
+            <h2 className="text-lg font-bold text-yellow-400 mb-2">{sectionLabels.experience.terminalTitle}</h2>
           </div>
 
           {/* Company Name */}

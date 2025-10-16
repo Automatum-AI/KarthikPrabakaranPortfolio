@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { ScrambledText } from '../ScrambledText';
-import { navigationSections } from '../../content/website-content';
+import { navigationSections, sectionTitleMapping } from '../../content/website-content';
 
 interface MobileHeaderProps {
   activeSection: string;
@@ -82,7 +82,7 @@ export function MobileHeader({ activeSection, onSectionChange, onAnimationComple
               }}
             >
               <ScrambledText 
-                text={displaySection}
+                text={sectionTitleMapping[displaySection] || displaySection}
                 isActive={shouldAnimate}
                 scrambleDuration={1200}
                 onComplete={handleScrambleComplete}

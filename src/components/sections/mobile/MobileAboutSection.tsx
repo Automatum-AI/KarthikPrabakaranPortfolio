@@ -114,3 +114,10 @@ export function MobileAboutSection({ isActive }: MobileAboutSectionProps) {
     </div>
   );
 }
+  import { profileData, sectionLabels } from '../../../content/website-content';
+      <>
+        <h2 className="text-lg font-bold text-yellow-400 mb-2">{sectionLabels.about.profileStatusTitle}</h2>
+        <p className="text-sm text-gray-300 mb-4">
+          {profileData.bio}
+        </p>
+      </>

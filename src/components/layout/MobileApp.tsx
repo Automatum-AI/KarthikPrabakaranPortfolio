@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import DriftingStarfield from '../DriftingStarfield';
+// import BlackHoleBackground from '../BlackHoleBackground';
 import { useResponsive } from '../ui/responsive-context';
 import { MobileHeader } from './MobileHeader';
 import { MobileFooter } from './MobileFooter';
@@ -80,7 +82,8 @@ export function MobileApp() {
 
   return (
     <div className="app-container">
-      
+      <DriftingStarfield />
+  {/* BlackHoleBackground removed for mobile version */}
       <div 
         className="app-header"
         style={{
@@ -94,33 +97,26 @@ export function MobileApp() {
           onAnimationComplete={handleAnimationComplete}
         />
       </div>
-      
       <div className="app-body">
         <div id="home" className="app-section">
           <MobileHomeSection isActive={activeSections.has('Home') && contentVisible} />
         </div>
-        
         <div id="about" className="app-section">
           <MobileAboutSection isActive={activeSections.has('About') && contentVisible} />
         </div>
-        
         <div id="skills" className="app-section">
           <MobileSkillsSection isActive={activeSections.has('Skills') && contentVisible} />
         </div>
-        
         <div id="projects" className="app-section">
           <MobileProjectsSection isActive={activeSections.has('Projects') && contentVisible} />
         </div>
-        
         <div id="experience" className="app-section">
           <MobileExperienceSection isActive={activeSections.has('Experience') && contentVisible} />
         </div>
-        
         <div id="contact" className="app-section">
           <MobileContactSection isActive={activeSections.has('Contact') && contentVisible} />
         </div>
       </div>
-      
       <div 
         className="app-footer"
         style={{

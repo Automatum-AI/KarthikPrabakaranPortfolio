@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SpaceHUD } from '../../SpaceHUD';
 import { contactInfo, socialLinks } from '../../../content/website-content';
+import { contactMethods, sectionLabels } from '../../../content/website-content';
 
 interface MobileContactSectionProps {
   isActive: boolean;
@@ -25,13 +26,7 @@ export function MobileContactSection({ isActive }: MobileContactSectionProps) {
         <div className="flex-1 flex flex-col justify-evenly gap-3 overflow-y-auto">
           {/* Header */}
           <div className="hud-stagger-1">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-2 h-2 rounded-full bg-[#20DBE9] animate-pulse"></div>
-              <span className="text-white font-mono uppercase tracking-wider"
-                    style={{ fontSize: 'clamp(12px, 3.5vw, 16px)' }}>
-                CONTACT INFO
-              </span>
-            </div>
+            <h2 className="text-lg font-bold text-yellow-400 mb-2">{sectionLabels.contact.commChannelTitle}</h2>
           </div>
 
           {/* Contact Details Row 1 */}

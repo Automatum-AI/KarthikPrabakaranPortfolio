@@ -1,4 +1,5 @@
 import React from 'react';
+import { sectionLabels } from '../../../content/website-content';
 
 interface MobileHomeSectionProps {
   isActive: boolean;
@@ -21,7 +22,9 @@ export function MobileHomeSection({ isActive }: MobileHomeSectionProps) {
               fontWeight: 900
             }}
           >
-            BEYOND EARTH.<br/>BEYOND DESIGN.
+            {sectionLabels.home.heroText.split('.').map((line, i) => (
+              <span key={i}>{line.trim()}{i < sectionLabels.home.heroText.split('.').length - 1 ? <br/> : null}</span>
+            ))}
           </h1>
         </div>
       </div>

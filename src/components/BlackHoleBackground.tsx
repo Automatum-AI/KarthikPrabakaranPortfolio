@@ -959,7 +959,7 @@ export default function BlackHoleBackground({
   currentSection?: string; 
 }) {
   return (
-    <div className="fixed inset-0 -z-10 bg-black">
+    <div className="fixed inset-0 -z-10" style={{ background: '#000' }}>
       <Canvas
         camera={{ 
           position: [0, 15, 50], 
@@ -972,7 +972,7 @@ export default function BlackHoleBackground({
           alpha: false,
           powerPreference: "high-performance",
           clearColor: "#000000",
-          pixelRatio: Math.min(window.devicePixelRatio, 2), // High DPI support
+          pixelRatio: 1, // Force pixel ratio 1 for mobile to avoid artifacts
           toneMapping: THREE.ACESFilmicToneMapping,
           toneMappingExposure: 1.2,
           outputColorSpace: THREE.SRGBColorSpace,
@@ -981,8 +981,9 @@ export default function BlackHoleBackground({
             type: THREE.PCFSoftShadowMap
           }
         }}
+        style={{ width: '100vw', height: '100vh', background: '#000' }}
         scene={{ background: new THREE.Color('#000000') }}
-        dpr={[1, 2]} // Device pixel ratio for crisp rendering
+        dpr={1}
       >
         <color attach="background" args={['#000000']} />
         <RealisticBlackHole 
