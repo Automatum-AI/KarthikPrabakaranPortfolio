@@ -134,7 +134,7 @@ const AboutSection = ({ isActive }: { isActive: boolean }) => {
                   </div>
                   <div className="flex flex-col" style={{ gap: `${responsive.spacing.xs}px` }}>
                     <span className="opacity-80 font-medium" style={{ fontSize: `${responsive.fontSize.base * 0.875}px` }}>Marital Status</span>
-                    <span className="font-bold" style={{ fontSize: `${responsive.fontSize.lg * 1.1}px` }}>Single</span>
+                    <span className="font-bold" style={{ fontSize: `${responsive.fontSize.lg * 1.1}px` }}>Married</span>
                   </div>
                   <div className="flex flex-col" style={{ gap: `${responsive.spacing.xs}px` }}>
                     <span className="opacity-80 font-medium" style={{ fontSize: `${responsive.fontSize.base * 0.875}px` }}>Languages</span>

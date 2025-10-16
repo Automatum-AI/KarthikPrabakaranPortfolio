@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ResponsiveProvider, useResponsive } from './components/ui/responsive-context';
 import { DesktopApp } from './components/layout/DesktopApp';
 import { MobileApp } from './components/layout/MobileApp';
 import DramaticBlackHole from './components/DramaticBlackHole';
+import Loader from './components/Loader';
 
 function AppContent() {
   const { isMobile, isReady } = useResponsive();
@@ -136,14 +137,23 @@ class BlackHoleRoot extends React.Component<{}, { scrollProgress: number; curren
 }
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500); // 1.5 seconds
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
-      {/* Black Hole is mounted once as a class component - maximum stability */}
       <BlackHoleRoot />
-      
-      <ResponsiveProvider>
-        <AppContent />
-      </ResponsiveProvider>
+      {loading ? (
+        <Loader />
+      ) : (
+        <ResponsiveProvider>
+          <AppContent />
+        </ResponsiveProvider>
+      )}
     </>
   );
 }
