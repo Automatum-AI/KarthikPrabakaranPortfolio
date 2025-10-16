@@ -59,6 +59,7 @@ const AboutSection = ({ isActive }: { isActive: boolean }) => {
             <div className="hud-stagger-3">
               <button
                 onClick={e => {
+                  console.log('Download Resume button clicked');
                   // Click effect
                   if (e.currentTarget) {
                     e.currentTarget.classList.add('clicked');
@@ -71,8 +72,12 @@ const AboutSection = ({ isActive }: { isActive: boolean }) => {
                   link.href = 'https://automatum-ai.github.io/KarthikPrabakaranPortfolio/Karthik%20Prabakaran_Resume.pdf';
                   link.download = 'Karthik Prabakaran_Resume.pdf';
                   document.body.appendChild(link);
+                  console.log('Download link created:', link.href);
                   link.click();
-                  document.body.removeChild(link);
+                  setTimeout(() => {
+                    document.body.removeChild(link);
+                    console.log('Download link removed from DOM');
+                  }, 1000);
                 }}
                 className="font-mono uppercase tracking-wide transition-all duration-300 relative overflow-hidden w-full resume-download-btn"
                 style={{
