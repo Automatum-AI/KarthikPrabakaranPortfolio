@@ -1,5 +1,5 @@
 {
-      "name": "Cosmic Portfolio Website",
+      "name": "cosmic-portfolio-website",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
@@ -60,6 +60,7 @@
       },
       "scripts": {
             "dev": "vite",
-            "build": "vite build"
+            "build": "vite build",
+            "deploy": "gh-pages -d dist"
       }
 }
