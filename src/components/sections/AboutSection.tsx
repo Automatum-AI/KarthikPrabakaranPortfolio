@@ -66,7 +66,7 @@ const AboutSection = ({ isActive }: { isActive: boolean }) => {
                   }, 200);
                   // Download resume
                   const link = document.createElement('a');
-                  link.href = '/src/assets/Karthik Prabakaran_Resume.pdf';
+                  link.href = '/Karthik Prabakaran_Resume.pdf';
                   link.download = 'Karthik Prabakaran_Resume.pdf';
                   document.body.appendChild(link);
                   link.click();
