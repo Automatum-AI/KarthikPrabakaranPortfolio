@@ -60,10 +60,12 @@ const AboutSection = ({ isActive }: { isActive: boolean }) => {
               <button
                 onClick={e => {
                   // Click effect
-                  e.currentTarget.classList.add('clicked');
-                  setTimeout(() => {
-                    e.currentTarget.classList.remove('clicked');
-                  }, 200);
+                  if (e.currentTarget) {
+                    e.currentTarget.classList.add('clicked');
+                    setTimeout(() => {
+                      if (e.currentTarget) e.currentTarget.classList.remove('clicked');
+                    }, 200);
+                  }
                   // Download resume
                   const link = document.createElement('a');
                   link.href = '/Karthik Prabakaran_Resume.pdf';
