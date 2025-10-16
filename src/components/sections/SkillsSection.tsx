@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { SpaceHUD } from '../SpaceHUD';
 import { SectionLayout, ThreeColumnLayout } from '../SectionLayout';
 import { skillCategories, getCategoryById, sectionLabels } from '../../content';
@@ -11,6 +11,14 @@ interface SkillsSectionProps {
 export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState('development');
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+
+  // Ensure selectedCategoryId is always valid - fall back to the first category if needed
+  useEffect(() => {
+    const current = getCategoryById(selectedCategoryId);
+    if (!current && skillCategories.length > 0) {
+      setSelectedCategoryId(skillCategories[0].id);
+    }
+  }, [selectedCategoryId]);
 
   // Get the current category
   const currentCategory = useMemo(() => {
@@ -54,13 +62,16 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
             </h3>
             
             <div className="hud-stagger-3 flex flex-col gap-3">
-              {skillCategories.map((category) => {
+              {skillCategories.map((category, idx) => {
                 const isSelected = selectedCategoryId === category.id;
                 
                 return (
                   <button
                     key={category.id}
                     onClick={() => setSelectedCategoryId(category.id)}
+                    role="tab"
+                    aria-selected={isSelected}
+                    tabIndex={isSelected ? 0 : -1}
                     className={`px-4 py-3 font-mono text-xs uppercase tracking-widest transition-all duration-300 relative overflow-hidden w-full ${
                       isSelected ? 'bg-black text-white' : 'bg-black/30 hover:bg-black/50'
                     }`}
@@ -115,7 +126,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
                 </span>
               </div>
               <p className="text-white/80 text-xs leading-relaxed">
-                {currentCategory.description}
+                <span style={{ fontSize: '1.15rem', lineHeight: '1.7' }}>{currentCategory.description}</span>
               </p>
             </div>
           </div>
@@ -123,21 +134,22 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
         
         middle={
           <div className="flex flex-col gap-8">
-            <div className="space-y-10">
+            <div className="space-y-16">
               {/* Primary Skills */}
-              <div>
+              <div className="skills-section-list">
                 <h3 
-                  className="font-bold text-xl uppercase tracking-wider mb-6"
+                  className="skills-section-heading"
                   style={{ 
                     color: currentCategory.color,
-                    textShadow: `0 0 10px ${currentCategory.color}80`
-                  }}
+                    textShadow: `0 0 18px ${currentCategory.color}80`,
+                    '--current-category-color': currentCategory.color
+                  } as React.CSSProperties}
                 >
                   {sectionLabels.skills.primarySkillsTitle}
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {currentCategory.primarySkills.map((skill: Skill) => (
-                    <div key={skill.name} className="text-white/90 text-sm">
+                    <div key={skill.name} className="text-white/90 text-lg">
                       {skill.name}
                     </div>
                   ))}
@@ -146,19 +158,20 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ isActive }) => {
 
               {/* Secondary Skills */}
               {currentCategory.secondarySkills.length > 0 && (
-                <div>
+                <div className="skills-section-list" style={{marginTop: '5rem'}}>
                   <h3 
-                    className="font-bold text-xl uppercase tracking-wider mb-6"
+                    className="skills-section-heading"
                     style={{ 
                       color: currentCategory.color,
-                      textShadow: `0 0 10px ${currentCategory.color}80`
-                    }}
+                      textShadow: `0 0 18px ${currentCategory.color}80`,
+                      '--current-category-color': currentCategory.color
+                    } as React.CSSProperties}
                   >
                     {sectionLabels.skills.supportingSkillsTitle}
                   </h3>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {currentCategory.secondarySkills.map((skill: Skill) => (
-                      <div key={skill.name} className="text-white/70 text-sm">
+                      <div key={skill.name} className="text-white/70 text-lg">
                         {skill.name}
                       </div>
                     ))}

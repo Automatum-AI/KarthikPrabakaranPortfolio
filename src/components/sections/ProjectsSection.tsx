@@ -71,11 +71,13 @@ export function ProjectsSection({ isActive }: ProjectsSectionProps) {
             </div>
             
             <div 
-              className="hud-stagger-2 p-4 border-l-2 text-sm leading-relaxed transition-all duration-300"
+              className="hud-stagger-2 p-4 border-l-2 leading-relaxed transition-all duration-300"
               style={{ 
                 borderColor: getStatusColor(selectedProject.status),
                 color: getStatusColor(selectedProject.status),
-                backgroundColor: `${getStatusColor(selectedProject.status)}10`
+                backgroundColor: `${getStatusColor(selectedProject.status)}10`,
+                fontSize: '1.25rem', // 20px
+                fontWeight: 500
               }}
             >
               {selectedProject.description}

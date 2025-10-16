@@ -3,38 +3,25 @@ import profileImage from "figma:asset/ccb5263e68f9d44fca6b4c7c752e36a4e840e93f.p
 import { PrimarySpaceHUD, SecondarySpaceHUD, AccentSpaceHUD } from '../SpaceHUD';
 import { SectionLayout, ThreeColumnLayout } from '../SectionLayout';
 import { useResponsive } from '../ui/responsive-context';
-import { profileData } from '../../content';
+import { profileData } from '../../content/website-content';
 
-interface AboutSectionProps {
-  isActive: boolean;
-}
-
-export function AboutSection({ isActive }: AboutSectionProps) {
+const AboutSection = ({ isActive }: { isActive: boolean }) => {
   const responsive = useResponsive();
-  
-  // Calculate responsive font sizes
   let nameFontSize = 48;
-  let titleFontSize = 48;
-  let statFontSize = 32;
-  let gapSize = 16;
-  
+  let titleFontSize = 44;
+  let statFontSize = 24;
+  let gapSize = 12;
   if (responsive.width <= 1200) {
-    nameFontSize = 28;
-    titleFontSize = 28;
-    statFontSize = 22;
-    gapSize = 12;
-  } else if (responsive.width <= 1400) {
     nameFontSize = 36;
-    titleFontSize = 36;
-    statFontSize = 26;
-    gapSize = 14;
+    titleFontSize = 32;
+    statFontSize = 20;
+    gapSize = 10;
   } else if (responsive.width <= 1600) {
     nameFontSize = 42;
-    titleFontSize = 42;
-    statFontSize = 28;
-    gapSize = 16;
+    titleFontSize = 38;
+    statFontSize = 22;
+    gapSize = 11;
   }
-  
   return (
     <SectionLayout isActive={isActive} sectionId="about">
       <ThreeColumnLayout
@@ -43,14 +30,13 @@ export function AboutSection({ isActive }: AboutSectionProps) {
             <div className="flex flex-col hud-stagger-1" style={{ gap: `${responsive.spacing.lg}px` }}>
               <div className="flex flex-col text-white" style={{ gap: `${responsive.spacing.md}px` }}>
                 <div className="font-bold text-[#facc14] uppercase" style={{ fontSize: `${nameFontSize}px`, lineHeight: '1.1' }}>
-                  <p>{profileData.name}</p>
+                  <p>KARTHIK PRABAKARAN</p>
                 </div>
-                <div className="font-normal text-white uppercase" style={{ fontSize: `${titleFontSize}px`, lineHeight: '1.2' }}>
-                  <p>{profileData.designation}</p>
+                <div className="font-normal text-white uppercase" style={{ fontSize: `${titleFontSize * 0.4}px`, lineHeight: '1.2' }}>
+                  <p>Sr. Graphic Designer | AI Generalist</p>
                 </div>
               </div>
             </div>
-            
             <div className="flex hud-stagger-2" style={{ gap: `${Math.min(gapSize * 2, responsive.spacing.lg)}px` }}>
               <div className="flex flex-col text-white" style={{ gap: `${responsive.spacing.sm}px` }}>
                 <div className="font-medium" style={{ fontSize: `${responsive.fontSize.base}px` }}>
@@ -71,16 +57,22 @@ export function AboutSection({ isActive }: AboutSectionProps) {
             </div>
             
             <div className="hud-stagger-3">
-              <button 
-                onClick={() => {
+              <button
+                onClick={e => {
+                  // Click effect
+                  e.currentTarget.classList.add('clicked');
+                  setTimeout(() => {
+                    e.currentTarget.classList.remove('clicked');
+                  }, 200);
+                  // Download resume
                   const link = document.createElement('a');
-                  link.href = '/resume.pdf';
-                  link.download = 'Karthik_Prabakaran_Resume.pdf';
+                  link.href = '/src/assets/Karthik Prabakaran_Resume.pdf';
+                  link.download = 'Karthik Prabakaran_Resume.pdf';
                   document.body.appendChild(link);
                   link.click();
                   document.body.removeChild(link);
                 }}
-                className="font-mono uppercase tracking-wide transition-all duration-300 relative overflow-hidden w-full"
+                className="font-mono uppercase tracking-wide transition-all duration-300 relative overflow-hidden w-full resume-download-btn"
                 style={{
                   border: '2px solid #FACC14',
                   backgroundColor: 'black',
@@ -99,30 +91,29 @@ export function AboutSection({ isActive }: AboutSectionProps) {
                   <span>↓</span>
                   <span>DOWNLOAD RESUME</span>
                 </span>
-                <div 
+                <div
                   className="absolute inset-0 opacity-30 pointer-events-none"
                   style={{
                     background: 'linear-gradient(90deg, transparent, #FACC1440, transparent)',
                     animation: 'advanced-scan-horizontal 3s ease-in-out infinite'
                   }}
                 />
-                </button>
-              </div>
+              </button>
             </div>
+          </div>
         }
         middle={
           <div className="flex flex-col h-full" style={{ gap: `${responsive.spacing.lg}px` }}>
             <div className="hud-stagger-4">
               <PrimarySpaceHUD title="SUMMARY" size="medium" glow={true}>
                 <div className="font-medium text-white leading-relaxed" style={{ fontSize: `${responsive.fontSize.base}px` }}>
-                  <p>Developer focused on delightful UIs, strong architecture, and performance. I enjoy TypeScript, React, Node, and building small tools that make teams faster.</p>
+                  <p>{profileData.bio}</p>
                 </div>
               </PrimarySpaceHUD>
             </div>
-            
             <div className="flex items-center justify-center flex-1 hud-stagger-5">
-              <div 
-                className="relative w-full h-full flex items-center justify-center" 
+              <div
+                className="relative w-full h-full flex items-center justify-center"
                 style={{ maxWidth: responsive.width <= 1200 ? '250px' : '350px' }}
               >
                 <div className="relative w-full h-full overflow-hidden rounded-lg flex items-center justify-center">
@@ -152,11 +143,10 @@ export function AboutSection({ isActive }: AboutSectionProps) {
                 </div>
               </SecondarySpaceHUD>
             </div>
-
             <div className="hud-stagger-6">
               <AccentSpaceHUD title="CORE SKILLS" glow={true}>
                 <div className="flex flex-col font-medium text-white" style={{ gap: `${responsive.spacing.sm}px`, fontSize: `${responsive.fontSize.base}px` }}>
-                  {['Graphic Design', 'UI/UX', 'Gen AI', 'Branding'].map((skill) => (
+                  {['Graphic Design', 'UI/UX', 'Prompt Engineering', 'Gen AI', 'Development', 'Automation'].map((skill) => (
                     <div key={skill}>
                       <ul>
                         <li className="list-disc ml-6">
@@ -168,7 +158,6 @@ export function AboutSection({ isActive }: AboutSectionProps) {
                 </div>
               </AccentSpaceHUD>
             </div>
-
             <div className="hud-stagger-7">
               <SecondarySpaceHUD title="EDUCATION" glow={true}>
                 <div className="flex justify-between items-start" style={{ gap: `${responsive.spacing.md}px` }}>
@@ -196,4 +185,6 @@ export function AboutSection({ isActive }: AboutSectionProps) {
       />
     </SectionLayout>
   );
-}
+};
+
+export default AboutSection;

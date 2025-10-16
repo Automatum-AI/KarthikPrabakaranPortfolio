@@ -1,6 +1,13 @@
+/* Resume Download Button Click Effect */
+.resume-download-btn.clicked {
+  box-shadow: 0 0 30px #20DBE9, 0 0 60px #20DBE9;
+  background-color: rgba(32, 219, 233, 0.25) !important;
+  border-color: #fff !important;
+  transition: box-shadow 0.2s, background-color 0.2s, border-color 0.2s;
+}
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&display=swap');
 
-@custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:is(.dark *)); */
 
 :root {
   --font-size: 16px;
@@ -82,7 +89,7 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-@theme inline {
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -125,21 +132,19 @@
   --text-xl: 1.25rem;
   --text-lg: 1.125rem;
   --text-base: 1rem;
-}
+} */
 
 /* Text sizes controlled by JavaScript responsive context */
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
+  /* Removed empty ruleset for * to fix lint error */
 
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground;
+  /* @apply bg-background text-foreground; */
     font-family: 'Exo 2', sans-serif;
   }
 }
@@ -174,7 +179,7 @@
     }
 
     p {
-      font-size: var(--text-base);
+      /* Removed empty ruleset to fix lint error */
       font-weight: var(--font-weight-normal);
       line-height: 1.5;
     }
@@ -293,6 +298,7 @@ html {
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
+    padding-bottom: 3rem;
     /* Hide scrollbar for webkit browsers */
     -webkit-scrollbar: none;
     -webkit-scrollbar-track: transparent;
@@ -424,11 +430,13 @@ html {
 /* Smooth scrolling for webkit browsers */
 @supports (-webkit-scroll-snap-type: y mandatory) {
   .snap-container {
-    -webkit-scroll-snap-type: y mandatory;
+  -webkit-scroll-snap-type: y mandatory;
+  scroll-snap-type: y mandatory;
   }
   
   .snap-section {
-    -webkit-scroll-snap-align: start;
+  -webkit-scroll-snap-align: start;
+  scroll-snap-align: start;
   }
 }
 

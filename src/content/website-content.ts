@@ -19,6 +19,7 @@ export interface ContactMethod {
 }
 
 export interface ContactInfo {
+  name: string;
   mobile: string;
   email: string;
   location: string;
@@ -114,7 +115,11 @@ export const profileData: ProfileData = {
   name: "KARTHIK PRABAKARAN",
   designation: "Sr. Graphic Designer/AI Generalist",
   avatar: "🚀",
-  bio: "As an innovative and dedicated designer with 10+ years of experience, I've embraced new design trends and technologies, allowing me to stay ahead in a rapidly evolving field. I excel in collaborating with clients, team members, and stakeholders to deliver designs that exceed expectations.",
+  bio: `A creative engineer on a mission to fuse design aesthetics with artificial intelligence.
+My background in graphic design gives me a deep sense of visual storytelling, composition, and emotion;
+my expertise in AI-driven automation transforms those visuals into living, thinking experiences.
+From developing autonomous desktop applications and AI brand generators to building cinematic, 3D web interfaces,
+I explore how machines can enhance creativity and how design can give AI a human voice.`,
   location: "Bangalore, India",
   experience: "10+ Years"
 };
@@ -190,6 +195,7 @@ export const contactMethods: ContactMethod[] = [
 
 // Contact information
 export const contactInfo: ContactInfo = {
+  name: "KARTHIK PRABAKARAN",
   mobile: "+91 99945 42400",
   email: "karthikbellus@gmail.com",
   location: "Bangalore, India"
@@ -329,7 +335,6 @@ export const skillCategories: SkillCategory[] = [
 
 ];
 
-
 // Generate flat arrays for backward compatibility
 export const PRIMARY_SKILLS: Skill[] = skillCategories.flatMap(category => category.primarySkills);
 export const SECONDARY_SKILLS: Skill[] = skillCategories.flatMap(category => category.secondarySkills);
@@ -392,11 +397,13 @@ export const getCategorySummary = (categoryId: string): {
 // Projects data
 export const projects: Project[] = [
   {
-    id: "ai-brand-generator",
-    title: "AI Brand Generator Platform",
-    category: "AI Development",
-    description: "Developed a comprehensive AI-powered platform that generates complete brand identities including logos, color palettes, typography, and brand guidelines. Used custom-trained models and advanced prompt engineering.",
-    technologies: ["Stable Diffusion", "Python", "React", "Node.js", "OpenAI API"],
+    id: "fintech-app",
+    title: "Fintech Desktop App",
+    category: "FinTech Automation",
+    description: `Developed a high-performance financial intelligence desktop application designed for loan lifecycle automation — from approval and disbursement to repayment tracking and cash management.
+The system integrates with Google Sheets APIs for seamless cloud synchronization and automated backend processes for daily loan status updates.
+The interface is engineered using custom PyQt components, providing a modular, mission-control-like dashboard with live data visualization.`,
+    technologies: ["Python", "Google Sheets API", "PyQt", "Cloud Automation"],
     image: "ai-brand-platform",
     status: "Live",
     year: "2024",
@@ -406,52 +413,15 @@ export const projects: Project[] = [
     id: "cosmic-portfolio",
     title: "Interactive Space Portfolio",
     category: "Web Design",
-    description: "Created an immersive portfolio website with space exploration theme, featuring smooth animations, interactive elements, and responsive design. Showcases creativity while maintaining professional standards.",
+  description: `An immersive 3D web experience built using React Three Fiber and Framer Motion, blending cinematic motion with interstellar storytelling.
+The portfolio unfolds as a journey through space, where each project is represented as a celestial body orbiting the creator’s core — symbolizing growth, gravity, and creativity.
+Designed with modular architecture, separating content, sections, and layouts for maximum scalability and performance.`,
     technologies: ["React", "Three.js", "Motion", "Tailwind CSS"],
     image: "cosmic-portfolio",
     status: "Beta",
     year: "2024"
-  },
-  {
-    id: "neural-art-installation",
-    title: "Neural Network Art Installation",
-    category: "AI Art",
-    description: "Collaborated with a contemporary art museum to create an interactive installation that generates art based on visitor emotions, using computer vision and generative AI models.",
-    technologies: ["TensorFlow", "OpenCV", "Processing", "Arduino"],
-    image: "neural-art",
-    status: "Exhibited",
-    year: "2023"
-  },
-  {
-    id: "sustainable-design-system",
-    title: "Sustainable Design System",
-    category: "Design System",
-    description: "Built a comprehensive design system for an eco-friendly tech startup, focusing on accessibility, sustainability metrics, and carbon footprint reduction in digital products.",
-    technologies: ["Figma", "Storybook", "React", "Design Tokens"],
-    image: "sustainable-design",
-    status: "Implemented",
-    year: "2023"
-  },
-  {
-    id: "ai-video-editor",
-    title: "AI-Powered Video Editor",
-    category: "AI Development",
-    description: "Designed and prototyped an AI assistant for video editing that automatically suggests cuts, transitions, and effects based on content analysis and user preferences.",
-    technologies: ["After Effects", "Python", "OpenAI", "FFmpeg"],
-    image: "ai-video-editor",
-    status: "Prototype",
-    year: "2024"
-  },
-  {
-    id: "metaverse-gallery",
-    title: "Virtual Reality Art Gallery",
-    category: "VR/AR",
-    description: "Created an immersive VR gallery experience for digital artists, featuring spatial audio, interactive exhibits, and real-time collaboration features for virtual art appreciation.",
-    technologies: ["Unity", "Blender", "Oculus SDK", "WebXR"],
-    image: "vr-gallery",
-    status: "Beta",
-    year: "2023"
   }
+
 ];
 
 // Experience data

@@ -3,7 +3,7 @@ import { useResponsive } from '../ui/responsive-context';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { HomeSection } from '../sections/HomeSection';
-import { AboutSection } from '../sections/AboutSection';
+import AboutSection from '../sections/AboutSection';
 import { SkillsSection } from '../sections/SkillsSection';
 import { ProjectsSection } from '../sections/ProjectsSection';
 import { ExperienceSection } from '../sections/ExperienceSection';

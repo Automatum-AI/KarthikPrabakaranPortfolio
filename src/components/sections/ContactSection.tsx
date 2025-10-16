@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SpaceHUD } from '../SpaceHUD';
 import { SectionLayout, ThreeColumnLayout } from '../SectionLayout';
 import { contactMethods, contactInfo, socialLinks, collaborationTypes, additionalChannels, sectionLabels } from '../../content';
+import { Radar } from '../Radar';
 import { useResponsive } from '../ui/responsive-context';
 
 interface ContactSectionProps {
@@ -31,43 +32,20 @@ export function ContactSection({ isActive }: ContactSectionProps) {
                   CONTACT INFO
                 </span>
               </div>
-              
-              <div className="font-medium text-white/60" style={{ fontSize: `${responsive.fontSize.base}px` }}>
-                <p>MOBILE NUMBER</p>
-              </div>
               <div 
-                className="font-bold"
+                className="font-extrabold uppercase"
                 style={{ 
-                  fontSize: `${responsive.fontSize.xl}px`,
+                  fontSize: '2.5rem',
+                  fontWeight: 900,
                   color: '#20DBE9',
-                  textShadow: '0 0 15px rgba(32, 219, 233, 0.8)',
+                  textShadow: '0 0 18px rgba(32, 219, 233, 0.8)',
                   wordBreak: 'break-word',
-                  overflowWrap: 'break-word'
+                  overflowWrap: 'break-word',
+                  letterSpacing: '0.08em'
                 }}
               >
-                <p>{contactInfo.mobile}</p>
+                <p>{contactInfo.name}</p>
               </div>
-            </div>
-            
-            <div className="flex flex-col" style={{ gap: `${responsive.spacing.sm}px` }}>
-              <div className="font-medium text-white/60" style={{ fontSize: `${responsive.fontSize.base}px` }}>
-                <p>EMAIL</p>
-              </div>
-              <div 
-                className="font-bold"
-                style={{ 
-                  fontSize: `${responsive.fontSize.base}px`,
-                  color: '#20DBE9',
-                  textShadow: '0 0 15px rgba(32, 219, 233, 0.8)',
-                  wordBreak: 'break-word',
-                  overflowWrap: 'break-word'
-                }}
-              >
-                <p>{contactInfo.email}</p>
-              </div>
-            </div>
-            
-            <div className="flex flex-col" style={{ gap: `${responsive.spacing.sm}px` }}>
               <div className="font-medium text-white/60" style={{ fontSize: `${responsive.fontSize.base}px` }}>
                 <p>LOCATION</p>
               </div>
@@ -83,7 +61,26 @@ export function ContactSection({ isActive }: ContactSectionProps) {
               >
                 <p>{contactInfo.location}</p>
               </div>
+              <div className="font-medium text-white/60" style={{ fontSize: `${responsive.fontSize.base}px` }}>
+                <p>MOBILE NUMBER</p>
+              </div>
+              <div 
+                className="font-bold"
+                style={{ 
+                  fontSize: '2.2rem',
+                  fontWeight: 900,
+                  color: '#20DBE9',
+                  textShadow: '0 0 18px rgba(32, 219, 233, 0.8)',
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase'
+                }}
+              >
+                <p>{contactInfo.mobile}</p>
+              </div>
             </div>
+            {/* Radar HUD removed as requested */}
           </div>
         }
         middle={
